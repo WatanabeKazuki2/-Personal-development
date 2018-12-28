@@ -65,7 +65,17 @@ public class UserDao {
 			ResultSet rs = pStmt.executeQuery();
 
 			if(rs.next()) {
-				udb.set
+				udb.setLoginId(rs.getString("login_id"));
+				udb.setName(rs.getString("user_name"));
+				udb.setBirthDate(rs.getDate("birth_date"));
+				udb.setCreateDate(rs.getDate("create_date"));
+				udb.setUpdateDate(rs.getDate("update_date"));
+				udb.setMailAddress(rs.getString("mail_address"));
+				udb.setStreetAddress(rs.getString("street_address"));
+				
+//				user_id	login_id	user_name	password	birth_date	mail_address	street_address	create_date	update_date
+//				1	admin	管理者	password	2000/01/01	addmin@gmail.com	埼玉県さいたま市北区2-2-2	2018/12/20 17:48:02	2018/12/20 17:48:07
+
 			}
 		} finally {
 			if (conn != null) {
