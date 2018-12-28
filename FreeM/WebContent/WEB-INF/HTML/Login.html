@@ -1,20 +1,60 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="ja">
 <head>
-	<meta charset="UTF-8">
-	<title>ログイン画面</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="">
+
+    <title>ログイン画面</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/docs/4.0/examples/sign-in/signin.css" rel="stylesheet">
 </head>
-<body>
-	<h1>ログイン</h1>
-		<form>
-			<div class="input-field col s8 offset-s2">
-				<input type = "text" name="loginId" value="loginId"><label>ログインID</label>
-			</div>
-			<div class="input-field col s8 offset-s2">
-				<input type="text" name="password" value="password"><label>パスワード</label>
-			</div>
-			<button type="submit" name="action">ログイン</button>
-			<a href="Regist">新規登録</a>
-		</form>
+
+<body class="text-center">
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="index.html">MM</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+	      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+
+	          <ul class="navbar-nav mr-auto">
+	          <li class="nav-item active">
+	            <a class="nav-link" href="Login.html">ログイン<span class="sr-only">(current)</span></a>
+	          </li>
+	          <li class="nav-item active">
+	            <a class="nav-link" href="userReference.html">ユーザー情報<span class="sr-only">(current)</span></a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link" href="UserList.html">ユーザー一覧</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link" href="Exhibit.html">商品登録</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link" href="cart.html">カート</a>
+	          </li>
+	          <li class="nav-item dropdown">
+	          </li>
+	        </ul>
+	      </div>
+	      </nav>
+<form class="form-signin">
+    <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">ログイン</h1>
+    <label for="inputEmail" class="sr-only">ログインID</label>
+    <input type="text" id="inputEmail" class="form-control" placeholder="LoginId" required autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+</form>
 </body>
 </html>

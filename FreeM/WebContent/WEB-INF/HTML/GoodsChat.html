@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>新規登録画面</title>
+    <title>商談画面</title>
       <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css">
     <link href="https://getbootstrap.com/docs/4.0/examples/starter-template/starter-template.css" rel="stylesheet">
   </head>
@@ -26,10 +26,7 @@
 	            <a class="nav-link" href="Login.html">ログイン<span class="sr-only">(current)</span></a>
 	          </li>
 	          <li class="nav-item active">
-	            <a class="nav-link" href="Logout.html">ログアウト<span class="sr-only">(current)</span></a>
-	          </li>
-	          <li class="nav-item active">
-	            <a class="nav-link" href="UserReference.html">ユーザー情報<span class="sr-only">(current)</span></a>
+	            <a class="nav-link" href="userReference.html">ユーザー情報<span class="sr-only">(current)</span></a>
 	          </li>
 	          <li class="nav-item">
 	            <a class="nav-link" href="UserList.html">ユーザー一覧</a>
@@ -47,36 +44,48 @@
 
     </nav>
 
-    <div class="container">
+    <div class="text-center">
+    <h1>商談掲示板</h1>
+    </div>
+        <div class="mx-auto" >
+    <table class="table table-bordered">
+        <tr>
+            <th></th>
+            <th>商品名</th>
+            <th>ユーザー名</th>
+            <th>配送方法</th>
+            <th>小計</th>
+        </tr>
+        <tr>
+        <td></td>
+        <td>ただのドア</td>
+        <td>山田次郎</td>
+        <td>ゆうパック</td>
+        <td>2500円</td>
+        </tr>
+    </table>
+    <div class="text-center">
+    <a href="ChatFinal.html"><button type="button">成立</button></a>
+    </div>
+    </div>
 
-      <div class="starter-template">
-        <h1>新規登録</h1>
-	<table class="table table-bordered">
-		<tr>
-			<td>ログインID</td>
-			<td><input type="text" name="loginId" value=""></td>
-		</tr>
-		<tr>
-			<td>ユーザー名</td>
-			<td><input type="text" name="name" value=""></td>
-		</tr>
-		<tr>
-			<td>パスワード</td>
-			<td><input type="text" name="password" value=""></td>
-		</tr>
-		<tr>
-			<td>パスワード(確認)</td>
-			<td><input type="text" name="password2" value=""></td>
-		</tr>
-		<tr>
-			<td>住所</td>
-			<td><input type="text" name="streetAddress" class="form-control" value=""></td>
-	</table>
+    <div class="text-center">
+        <h3>掲示板</h3>
+        <a href="ChatInput.html"><button>掲示板に記入</button></a>
+    </div>
+    <table>
+        <tr>
+            <td>佐川智子</td>
+            <td>こんばんは！入金方法はどのようにすればよろしいでしょうか！</td>
+            <td>2018年12月1日13時05分</td>
+        </tr>
+        <tr>
+            <td>山田次郎</td>
+            <td>りそな銀行の〇〇✖✖の口座まで送金お願いします！</td>
+            <td>2018年12月1日13時08分</td>
+        </tr>
+    </table>
 
-	        <a href="error.html"><button type="button">登録</button></a>
-      </div>
-
-    </div><!-- /.container -->
 
 
     <!-- Bootstrap core JavaScript

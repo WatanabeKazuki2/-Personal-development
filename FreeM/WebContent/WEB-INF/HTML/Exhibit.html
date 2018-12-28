@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>新規登録画面</title>
+    <title>出品画面</title>
       <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css">
     <link href="https://getbootstrap.com/docs/4.0/examples/starter-template/starter-template.css" rel="stylesheet">
   </head>
@@ -50,27 +50,46 @@
     <div class="container">
 
       <div class="starter-template">
-        <h1>新規登録</h1>
+        <h1>商品情報を入力してください</h1>
 	<table class="table table-bordered">
 		<tr>
-			<td>ログインID</td>
-			<td><input type="text" name="loginId" value=""></td>
+			<td>商品名</td>
+			<td><input type="text" name="goodsName" value=""></td>
 		</tr>
 		<tr>
-			<td>ユーザー名</td>
-			<td><input type="text" name="name" value=""></td>
+		    <td>商品画像</td>
+		    <td>
+		    <form>
+				  <div class="form-group">
+				    <label for="exampleFormControlFile1"></label>
+					    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+				  </div>
+				</form>
+			</td>
 		</tr>
 		<tr>
-			<td>パスワード</td>
-			<td><input type="text" name="password" value=""></td>
+		<tr>
+			<td>カテゴリー</td>
+			<td>
+				<select class="selectpicker">
+	              <option value="0">カテゴリー</option>
+                  <option value="1">雑貨</option>
+                  <option value="2">秘密道具</option>
+                  <option value="3">楽器</option>
+              </select>
+			</td>
 		</tr>
 		<tr>
-			<td>パスワード(確認)</td>
-			<td><input type="text" name="password2" value=""></td>
+			<td>運送方法</td>
+			<td><input type="text" name="" value=""></td>
 		</tr>
 		<tr>
-			<td>住所</td>
-			<td><input type="text" name="streetAddress" class="form-control" value=""></td>
+			<td>金額</td>
+			<td><input type="text" name="value" value=""></td>
+		</tr>
+		<tr>
+			<td>コメント</td>
+			<td><textarea name="coment" value="" ></textarea></td>
 	</table>
 
 	        <a href="error.html"><button type="button">登録</button></a>
@@ -87,3 +106,4 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
   </body>
 </html>
+

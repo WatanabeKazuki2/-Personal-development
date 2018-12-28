@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>新規登録画面</title>
+    <title>購入履歴リスト画面</title>
       <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css">
     <link href="https://getbootstrap.com/docs/4.0/examples/starter-template/starter-template.css" rel="stylesheet">
   </head>
@@ -26,10 +26,7 @@
 	            <a class="nav-link" href="Login.html">ログイン<span class="sr-only">(current)</span></a>
 	          </li>
 	          <li class="nav-item active">
-	            <a class="nav-link" href="Logout.html">ログアウト<span class="sr-only">(current)</span></a>
-	          </li>
-	          <li class="nav-item active">
-	            <a class="nav-link" href="UserReference.html">ユーザー情報<span class="sr-only">(current)</span></a>
+	            <a class="nav-link" href="userReference.html">ユーザー情報<span class="sr-only">(current)</span></a>
 	          </li>
 	          <li class="nav-item">
 	            <a class="nav-link" href="UserList.html">ユーザー一覧</a>
@@ -47,36 +44,40 @@
 
     </nav>
 
-    <div class="container">
+    <div class="text-center">
+    <h1>購入履歴一覧</h1>
+    </div>
+        <div class="mx-auto" >
+    <table class="table table-bordered">
+        <tr>
+        	<th></th>
+            <th>商品名</th>
+            <th>配送方法</th>
+            <th>小計</th>
+            <th></th>
+        </tr>
+        <tr>
+        <td> <img src="../../img/dram.jpg" alt="" width="110" height="150"></td>
+        <td>電子ドラム</td>
+        <td>ゆうパック</td>
+        <td>87000円</td>
+        <td>
+            <a href="GoodsReference.html"><button type="button">詳細</button></a>
+        </td>
+        </tr>
+        <tr>
+        <td> <img src="../../img/stick.jpg" alt="" width="110" height="150"></td>
+        <td>スティック</td>
+        <td>佐川急便</td>
+        <td>1000円</td>
+        <td>
+            <a href="GoodsReference.html"><button type="button">詳細</button></a>
+        </td>
+        </tr>
+	   </table>
+    <a href="UserReference.html">戻る</a>
+    </div>
 
-      <div class="starter-template">
-        <h1>新規登録</h1>
-	<table class="table table-bordered">
-		<tr>
-			<td>ログインID</td>
-			<td><input type="text" name="loginId" value=""></td>
-		</tr>
-		<tr>
-			<td>ユーザー名</td>
-			<td><input type="text" name="name" value=""></td>
-		</tr>
-		<tr>
-			<td>パスワード</td>
-			<td><input type="text" name="password" value=""></td>
-		</tr>
-		<tr>
-			<td>パスワード(確認)</td>
-			<td><input type="text" name="password2" value=""></td>
-		</tr>
-		<tr>
-			<td>住所</td>
-			<td><input type="text" name="streetAddress" class="form-control" value=""></td>
-	</table>
-
-	        <a href="error.html"><button type="button">登録</button></a>
-      </div>
-
-    </div><!-- /.container -->
 
 
     <!-- Bootstrap core JavaScript
