@@ -14,7 +14,7 @@
 	            <a class="nav-link" href="Login">ログイン（ログイン中はなし）<span class="sr-only">(current)</span></a>
 	          </li>
 	          <li class="nav-item active">
-	            <a class="nav-link" href="Logout.html">ログアウト（ログイン中のみ）<span class="sr-only">(current)</span></a>
+	            <a class="nav-link" href="Logout">ログアウト（ログイン中のみ）<span class="sr-only">(current)</span></a>
 	          </li>
 	          <li class="nav-item active">
 	            <a class="nav-link" href="UserReference.html">ユーザー情報<span class="sr-only">(current)</span></a>

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,42 +14,12 @@
   </head>
 
   <body>
-
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="index.html">MM</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-	      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-
-	          <ul class="navbar-nav mr-auto">
-	          <li class="nav-item active">
-	            <a class="nav-link" href="login.html">ログイン<span class="sr-only">(current)</span></a>
-	          </li>
-	          <li class="nav-item active">
-	            <a class="nav-link" href="userReference.html">ユーザー情報<span class="sr-only">(current)</span></a>
-	          </li>
-	          <li class="nav-item">
-	            <a class="nav-link" href="UserList.html">ユーザー一覧</a>
-	          </li>
-	          <li class="nav-item">
-	            <a class="nav-link" href="Exhibit.html">商品登録</a>
-	          </li>
-	          <li class="nav-item">
-	            <a class="nav-link" href="cart.html">カート</a>
-	          </li>
-	          <li class="nav-item dropdown">
-	          </li>
-	        </ul>
-	      </div>
-
-    </nav>
+	<jsp:include page="/baselayout/header.jsp" />
 
     <div class="container">
       <div class="starter-template"></div>
       <h1>ログアウトしました！</h1>
-      <a href="index.html"><button type="button">ホームへ</button></a>
+      <a href="Index"><button type="button">ホームへ</button></a>
 
     </div><!-- /.container -->
 

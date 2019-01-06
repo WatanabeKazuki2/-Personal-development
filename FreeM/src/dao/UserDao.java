@@ -12,6 +12,7 @@ import beans.UserDateBeans;
 public class UserDao {
 
 	//ユーザーIDを取得用
+	@SuppressWarnings("null")
 	public int getUserId(String loginId, String password) throws NoSuchAlgorithmException, SQLException {
 		Connection conn = DBManager.getConnection();
 
@@ -38,8 +39,11 @@ public class UserDao {
 			ResultSet rs = pStmt.executeQuery();
 
 			// 主キーに紐づくレコードは1件のみなので、rs.next()は1回だけ行う
+            if (!rs.next()) {
+                return (Integer) null;
+            }
 
-			int userId = rs.getInt("id");
+			int userId = rs.getInt("user_id");
 			return userId;
 
 		} catch (SQLException e) {
@@ -59,7 +63,7 @@ public class UserDao {
 		UserDateBeans udb = new UserDateBeans();
 		try {
 
-			String sql = "SELECT * FROM user_info WHERE id=?";
+			String sql = "SELECT * FROM user_info WHERE user_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1,userId );
 			ResultSet rs = pStmt.executeQuery();
@@ -72,9 +76,7 @@ public class UserDao {
 				udb.setUpdateDate(rs.getDate("update_date"));
 				udb.setMailAddress(rs.getString("mail_address"));
 				udb.setStreetAddress(rs.getString("street_address"));
-				
-//				user_id	login_id	user_name	password	birth_date	mail_address	street_address	create_date	update_date
-//				1	admin	管理者	password	2000/01/01	addmin@gmail.com	埼玉県さいたま市北区2-2-2	2018/12/20 17:48:02	2018/12/20 17:48:07
+
 
 			}
 		} finally {
