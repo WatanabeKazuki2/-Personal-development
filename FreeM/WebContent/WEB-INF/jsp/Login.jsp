@@ -21,14 +21,14 @@
 <body class="text-center">
 	<jsp:include page="/baselayout/header.jsp" />
 
-	<form class="form-signin">
+	<form action="Login" method="post" class="form-signin">
 	    <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
 	    <h1 class="h3 mb-3 font-weight-normal">ログイン</h1>
 	    <label for="inputEmail" class="sr-only">ログインID</label>
-	    <input type="text" id="inputEmail" class="form-control" placeholder="LoginId" required autofocus>
+	    <input type="text" name="loginId" loginId="ログインID" id="inputEmail" class="form-control" placeholder="LoginId" required autofocus>
 	    <label for="inputPassword" class="sr-only">Password</label>
-	    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-	    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+	    <input type="password" name="password" password="password" id="inputPassword" class="form-control" placeholder="Password" required>
+	    <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 	    <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
 	</form>
 </body>

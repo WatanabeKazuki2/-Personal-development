@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ユーザー情報</title>
+    <title>商談画面</title>
       <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css">
     <link href="https://getbootstrap.com/docs/4.0/examples/starter-template/starter-template.css" rel="stylesheet">
   </head>
@@ -44,54 +44,48 @@
 
     </nav>
 
-    <div class="container">
-
-      <div class="starter-template">
-        <h1>ユーザー情報</h1>
-      </div>
-
-      <div class="text-center">
-          <table class="table table-bordered">
-    		<tr>
-    			<td>ログインID(本人のみ)</td>
-    			<td>0001</td>
-    		</tr>
-    		<tr>
-    			<td>ユーザー名</td>
-    			<td>山田太郎</td>
-    		</tr>
-    		<tr>
-    			<td>生年月日(本人のみ)</td>
-    			<td>1990年01月01日</td>
-    		</tr>
-    		<tr>
-    			<td>登録日時</td>
-    			<td>2018年01月01日</td>
-    		</tr>
-    		<tr>
-    			<td>更新日時</td>
-    			<td>2018年01月01日</td>
-    		</tr>
-    		<tr>
-    			<td>メールアドレス（本人のみ）</td>
-    			<td>freeMM@gmail.com</td>
-    		</tr>
-    		<tr>
-    			<td>住所(本人のみ)</td>
-    			<td>埼玉県さいたま市北区1-1-1</td>
-    		</tr>
-    	</table>
-    	<p><a href="UserUpdate.html"><button type="button">更新画面へ</button></a>(本人のみ)</p>
-      </div>
-    </div><!-- /.container -->
+    <div class="text-center">
+    <h1>商談掲示板</h1>
+    </div>
+        <div class="mx-auto" >
+    <table class="table table-bordered">
+        <tr>
+            <th></th>
+            <th>商品名</th>
+            <th>ユーザー名</th>
+            <th>配送方法</th>
+            <th>小計</th>
+        </tr>
+        <tr>
+        <td></td>
+        <td>ただのドア</td>
+        <td>山田次郎</td>
+        <td>ゆうパック</td>
+        <td>2500円</td>
+        </tr>
+    </table>
+    <div class="text-center">
+    <a href="ChatFinal.html"><button type="button">成立</button></a>
+    </div>
+    </div>
 
     <div class="text-center">
-    <p><a href="ExhibitList.html"><button type="button">出品物一覧</button></a></p>
-    <p><a href="ExhibitStandBy.html"><button type="button">出品待機一覧</button></a>(本人のみ)</p>
-    <p><a href="ExhibitHistory.html"><button type="button">出品履歴一覧</button></a></p>
-    <p><a href="BuyStandBy.html"><button type="button">購入待機一覧</button></a>(本人のみ)</p>
-    <p><a href="BuyHistory.html"><button type="button">購入履歴一覧</button></a>(本人のみ)</p>
+        <h3>掲示板</h3>
+        <a href="ChatInput.html"><button>掲示板に記入</button></a>
     </div>
+    <table>
+        <tr>
+            <td>佐川智子</td>
+            <td>こんばんは！入金方法はどのようにすればよろしいでしょうか！</td>
+            <td>2018年12月1日13時05分</td>
+        </tr>
+        <tr>
+            <td>山田次郎</td>
+            <td>りそな銀行の〇〇✖✖の口座まで送金お願いします！</td>
+            <td>2018年12月1日13時08分</td>
+        </tr>
+    </table>
+
 
 
     <!-- Bootstrap core JavaScript

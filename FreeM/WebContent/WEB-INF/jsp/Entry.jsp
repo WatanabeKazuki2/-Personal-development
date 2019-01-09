@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,55 +8,57 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ユーザー情報更新画面</title>
+    <title>新規登録画面</title>
       <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css">
     <link href="https://getbootstrap.com/docs/4.0/examples/starter-template/starter-template.css" rel="stylesheet">
   </head>
 
   <body>
 
-   <jsp:include page="/baselayout/header.jsp" />
-
+    <jsp:include page="/baselayout/header.jsp" />
+    <c:if test="${errMsg != null}" >
+	    <div class="alert alert-danger">
+		  <strong>${errMsg}</strong>
+		</div>
+		</c:if>
     <div class="container">
+		<form action="Entry" method="post">
+	      <div class="starter-template">
+	        <h1>新規登録</h1>
+		<table class="table table-bordered">
+			<tr>
+				<td>ログインID</td>
+				<td><input type="text" name="loginId" value=""></td>
+			</tr>
+			<tr>
+				<td>ユーザー名</td>
+				<td><input type="text" name="name" value=""></td>
+			</tr>
+			<tr>
+				<td>生年月日</td>
+				<td><input type="Date" name="birthDate" value=""></td>
+			</tr>
+			<tr>
+				<td>パスワード</td>
+				<td><input type="text" name="password" value=""></td>
+			</tr>
+			<tr>
+				<td>パスワード(確認)</td>
+				<td><input type="text" name="password2" value=""></td>
+			</tr>
+			<tr>
+				<td>メールアドレス</td>
+				<td><input type="text" name="mailAddress" value=""></td>
+			</tr>
+			<tr>
+				<td>住所</td>
+				<td><input type="text" name="streetAddress" class="form-control" value=""></td>
+		</table>
 
-      <div class="starter-template">
-        <h1>ユーザー情報更新</h1>
-      </div>
+		        <a href="Login"><button type="submit">登録</button></a>
+	      </div>
+		</form>
 
-      <div class="text-center">
-          <table class="table table-bordered">
-    		<tr>
-    			<td>ログインID</td>
-    			<td>0001</td>
-    		</tr>
-    		<tr>
-    			<td>ユーザー名</td>
-    			<td><input type="text" value="" placeholder="山田太郎"></td>
-    		</tr>
-    		<tr>
-    			<td>生年月日</td>
-    			<td><input type="text" value="" placeholder="1990年01月01日"></td>
-    		</tr>
-    		<tr>
-    			<td>登録日時</td>
-    			<td><input type="text" value="" placeholder="2018年01月01日"></td>
-    		</tr>
-    		<tr>
-    			<td>更新日時</td>
-    			<td><input type="text" value="" placeholder="2018年01月01日"></td>
-    		</tr>
-    		<tr>
-    			<td>メールアドレス</td>
-    			<td><input type="text" value="" placeholder="FreeMM@gmail.com"></td>
-    		</tr>
-    		<tr>
-    			<td>住所</td>
-    			<td><input type="text" value="" placeholder="埼玉県さいたま市北区1-1-1"></td>
-    		</tr>
-    	</table>
-    	<p><a href="UserReference.html"><button type="button">更新</button></a></p>
-    	<a href="UserReference.html">戻る</a>
-      </div>
     </div><!-- /.container -->
 
 
