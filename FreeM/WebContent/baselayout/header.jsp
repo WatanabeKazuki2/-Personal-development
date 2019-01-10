@@ -30,7 +30,7 @@
 	            <a class="nav-link" href="UserReference">ユーザー情報<span class="sr-only">(current)</span></a>
 	          </li>
 	          <li class="nav-item">
-	            <a class="nav-link" href="UserList.html">ユーザー一覧</a>
+	            <a class="nav-link" href="UserListS">ユーザー一覧</a>
 	          </li>
 	          <li class="nav-item">
 	            <a class="nav-link" href="Exhibit.html">商品登録</a>

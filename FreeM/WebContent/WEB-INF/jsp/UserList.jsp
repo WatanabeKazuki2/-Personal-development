@@ -9,57 +9,42 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ユーザー情報更新画面</title>
+    <title>ユーザー一覧</title>
       <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css">
     <link href="https://getbootstrap.com/docs/4.0/examples/starter-template/starter-template.css" rel="stylesheet">
   </head>
 
   <body>
 
-   <jsp:include page="/baselayout/header.jsp"/>
+    <jsp:include page="/baselayout/header.jsp" />
 
-	<form action="UserUpdate" method="POST">
     <div class="container">
 
       <div class="starter-template">
-        <h1>ユーザー情報更新</h1>
-      </div>
-      <div class="text-center">
-          <table class="table table-bordered">
+        <h1>ユーザー一覧</h1>
+
+        <table class="table table-bordered">
     		<tr>
-    			<td>ログインID</td>
-    			<td>${user.loginId}</td>
+    			<th>ユーザー名</th>
+    			<th>出品数</th>
+    			<th></th>
     		</tr>
-    		<tr>
-    			<td>ユーザー名</td>
-    			<td><input type="text" name="name" placeholder="${user.name}"></td>
-    		</tr>
-    		<tr>
-    			<td>生年月日</td>
-    			<td><input type="date" name="birthDate" placeholder="${user.birthDate}"></td>
-    		</tr>
-    		<tr>
-    			<td>パスワード</td>
-    			<td><input type="text" name="password"></td>
-    		</tr>
-    		<tr>
-    			<td>パスワード（確認）</td>
-    			<td><input type="text" name="password2"></td>
-    		</tr>
-    		<tr>
-    			<td>メールアドレス</td>
-    			<td><input type="text" name="mailAddress"  placeholder="${user.mailAddress}"></td>
-    		</tr>
-    		<tr>
-    			<td>住所</td>
-    			<td><input type="text" name="streetAddress" placeholder="${user.streetAddress}"></td>
-    		</tr>
+    		<form action="UserList" method="post">
+    			<c:forEach var="user" items="${userList}">
+    			<input type="hidden" name ="userId" userId="${user.userId}">
+		    		<tr>
+		    			<td>${user.name}</td>
+		    			<td>3件</td>
+		    			<td><a href="UserReference?userId=${user.userId}"><button type="button">詳細</button></a></td>
+		    		</tr>
+    			</c:forEach>
+    		</form>
+
+
     	</table>
-    	<p><button type="submit">更新</button></p>
-    	<a href="UserReference">戻る</a>
       </div>
+
     </div><!-- /.container -->
-	</form>
 
 
     <!-- Bootstrap core JavaScript
@@ -70,3 +55,4 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
   </body>
 </html>
+

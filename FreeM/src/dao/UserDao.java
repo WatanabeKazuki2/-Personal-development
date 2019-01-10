@@ -5,9 +5,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import base.DBManager;
 import beans.UserDateBeans;
+import free_mm.FMHelper;
 
 public class UserDao {
 
@@ -22,20 +25,12 @@ public class UserDao {
 			// SELECT文を準備
 			String sql = "SELECT * FROM user_info WHERE login_id = ? and password = ?";
 
+//			パスワードをMD5で暗号化
+			String ps = FMHelper.psMD5(password);
 			// SELECTを実行し、結果表を取得
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, loginId);
-			//ハッシュを生成したい元の文字列
-//			String source = password;
-			//ハッシュ生成前にバイト配列に置き換える際のCharset
-//			Charset charset = StandardCharsets.UTF_8;
-			//ハッシュアルゴリズム
-//			String algorithm = "MD5";
-
-			//ハッシュ生成処理
-//			byte[] bytes = MessageDigest.getInstance(algorithm).digest(source.getBytes(charset));
-//			String result = DatatypeConverter.printHexBinary(bytes);
-			pStmt.setString(2, password);
+			pStmt.setString(2, ps);
 			ResultSet rs = pStmt.executeQuery();
 
 			// 主キーに紐づくレコードは1件のみなので、rs.next()は1回だけ行う
@@ -116,16 +111,26 @@ public class UserDao {
 //		データベースへの接続
 		Connection conn = DBManager.getConnection();
 		try {
-
+//			パスワードをMD5で暗号化
+			String ps = FMHelper.psMD5(password);
 
 			//INSERT文を準備
-			String sql = "INSERT INTO user_info (login_id ,user_name,password,birth_date,mail_address,street_address,create_date,update_date)VALUES(?,?,?,?,?,?,now(),now())";
+			String sql = "INSERT INTO user_info ("
+					+ "login_id ,"
+					+ "user_name,"
+					+ "password,"
+					+ "birth_date,"
+					+ "mail_address,"
+					+ "street_address,"
+					+ "create_date,"
+					+ "update_date)"
+					+ "VALUES(?,?,?,?,?,?,now(),now())";
 
 			//INSERT文に内容を入れる
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1,loginId);
 			pStmt.setString(2,name);
-			pStmt.setString(3,password);
+			pStmt.setString(3,ps);
 			pStmt.setString(4,birthDate);
 			pStmt.setString(5,mailAddress);
 			pStmt.setString(6,streetAddress);
@@ -135,7 +140,124 @@ public class UserDao {
 			pStmt.close();
 		}catch(SQLException e){
 			e.printStackTrace();
+		}finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO 自動生成された catch ブロック
+					e.printStackTrace();
+				}
+			}
 		}
+	}
+
+//	ユーザー更新用
+	public static void UserUpdate(int userId,String name,String birthDate,String password,String mailAddress,String streetAddress) throws SQLException, NoSuchAlgorithmException {
+//		データベースに接続
+		Connection conn = DBManager.getConnection();
+		try {
+
+//			パスワードに変更がない時
+			if(password.equals("")) {
+//				SQLにUPDATE文を準備
+					String sql = "UPDATE user_info SET "
+							+ "user_name = ?,"
+							+ "birth_date = ?,"
+							+ "mail_address=?,"
+							+ "street_address=?,"
+							+ "update_date=now() "
+							+ "WHERE "
+							+ "user_id = ?";
+
+//				PreparedStatementで？に値をセット
+					PreparedStatement pStmt = conn.prepareStatement(sql);
+
+					pStmt.setString(1,name);
+					pStmt.setString(2,birthDate);
+					pStmt.setString(3,mailAddress);
+					pStmt.setString(4,streetAddress);
+					pStmt.setInt(5,userId);
+
+					pStmt.executeUpdate();
+
+					pStmt.close();
+
+			}else {
+//		パスワードをMD5で暗号化
+				String ps = FMHelper.psMD5(password);
+//			SQLにUPDATE文を準備
+				String sql = "UPDATE user_info SET "
+						+ "user_name = ?,"
+						+ "birth_date = ?,"
+						+ "password = ?,"
+						+ "mail_address=?,"
+						+ "street_address=?"
+						+ "update_date=now()"
+						+ "WHHERE "
+						+ "userId = ?";
+
+//			PreparedStatementで？に値をセット
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+
+				pStmt.setString(1,name);
+				pStmt.setString(2,birthDate);
+				pStmt.setString(3,ps);
+				pStmt.setString(4,mailAddress);
+				pStmt.setString(5,streetAddress);
+				pStmt.setInt(6,userId);
+
+				pStmt.executeUpdate();
+
+				pStmt.close();
+
+			}
+		}finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO 自動生成された catch ブロック
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+//	ユーザーリスト用
+	public static List<UserDateBeans> UserAll(){
+		Connection conn = DBManager.getConnection();
+		List<UserDateBeans> userList = new ArrayList<UserDateBeans>();
+		String sql = "SELECT * FROM user_info";
+		try {
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				 UserDateBeans udb = new UserDateBeans();
+				udb.setUserId(rs.getInt("user_id"));
+				udb.setName(rs.getString("user_name"));
+
+				userList.add(udb);
+			 }
+
+			return userList;
+
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}finally{
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO 自動生成された catch ブロック
+					e.printStackTrace();
+				}
+			}
+
+		}
+		return userList;
 	}
 
 }

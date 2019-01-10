@@ -60,7 +60,7 @@ public class FMHelper {
 	static final String GOODS_UPDATE_PAGE="/WEB-INF/jsp/GoodsUpdate.jsp";
 
 	//MD5暗号化用のメソッド
-	public static String angou(String ps) throws NoSuchAlgorithmException {
+	public static String psMD5(String ps) throws NoSuchAlgorithmException {
 		//ハッシュを生成したい元の文字列
 		String source = ps;
 		//ハッシュ生成前にバイト配列に置き換える際のCharset

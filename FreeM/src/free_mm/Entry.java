@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import dao.UserDao;
 
@@ -41,7 +40,6 @@ public class Entry extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession();
 
 		String loginId = request.getParameter("loginId");
 		String name = request.getParameter("name");
@@ -50,7 +48,7 @@ public class Entry extends HttpServlet {
 		String birthDate=request.getParameter("birthDate");
 		String mailAddress=request.getParameter("mailAddress");
 		String streetAddress=request.getParameter("streetAddress");
-		if(loginId.equals("") || name.equals("") || password.equals("") || birthDate.equals("")|| !(password.equals(password2))||mailAddress.equals("")||streetAddress.equals("")||session!=null){
+		if(loginId.equals("") || name.equals("") || password.equals("") || birthDate.equals("")|| !(password.equals(password2))||mailAddress.equals("")||streetAddress.equals("")){
 			request.setAttribute("errMsg", "入力された内容は正しくありません");
 			// ログインjspにフォワード
 			RequestDispatcher dispatcher = request.getRequestDispatcher(FMHelper.ENTRY_PAGE);
