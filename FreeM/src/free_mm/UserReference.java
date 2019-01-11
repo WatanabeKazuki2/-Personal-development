@@ -20,13 +20,13 @@ import dao.UserDao;
 public class UserReference extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UserReference() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public UserReference() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -34,11 +34,24 @@ public class UserReference extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		int userId = (int) session.getAttribute("userId");
-		try {
-			UserDateBeans user = UserDao.AllUserDateBeans(userId);
-			request.setAttribute("userDate", user);
-			// フォワード
-			request.getRequestDispatcher(FMHelper.USER_REFERENCE_PAGE).forward(request, response);
+ 		try {
+//			ユーザーリストの詳細から飛ぶとき
+
+			if(request.getParameter("userId") == null) {
+//				ユーザー情報参照から飛ぶとき
+				UserDateBeans user = UserDao.AllUserDateBeans(userId);
+				request.setAttribute("userDate", user);
+				// フォワード
+				request.getRequestDispatcher(FMHelper.USER_REFERENCE_PAGE).forward(request, response);
+
+			}else {
+				int userIdUrl = Integer.parseInt(request.getParameter("userId"));
+
+				UserDateBeans user = UserDao.AllUserDateBeans(userIdUrl);
+				request.setAttribute("userDate", user);
+				// フォワード
+				request.getRequestDispatcher(FMHelper.USER_REFERENCE_PAGE).forward(request, response);
+			}
 
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック

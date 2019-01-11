@@ -43,8 +43,20 @@ public class UserList extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+
+//		検索タブの文字を取得
+		String name = request.getParameter("name");
+
+//		DBから検索したユーザー情報を取得
+		List<UserDateBeans> seachUser = UserDao.UserSeach(name);
+
+//		jspにセット
+		request.setAttribute("userList", seachUser);
+
+		// フォワード
+		request.getRequestDispatcher(FMHelper.USER_LIST_PAGE).forward(request, response);
+
 	}
 
 }

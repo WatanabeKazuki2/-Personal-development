@@ -26,19 +26,19 @@
 			          </li>
 	          	</c:otherwise>
 	          </c:choose>
+	          <li class="nav-item">
+	            <a class="nav-link" href="UserList">ユーザー一覧</a>
+	          </li>
+	          <c:if test="${userInfo.userId>=1}">
 	          <li class="nav-item active">
 	            <a class="nav-link" href="UserReference">ユーザー情報<span class="sr-only">(current)</span></a>
 	          </li>
 	          <li class="nav-item">
-	            <a class="nav-link" href="UserList">ユーザー一覧</a>
-	          </li>
-	          <li class="nav-item">
-	            <a class="nav-link" href="Exhibit.html">商品登録</a>
+	            <a class="nav-link" href="Exhibit">商品登録</a>
 	          </li>
 	          <li class="nav-item">
 	            <a class="nav-link" href="cart.html">カート</a>
 	          </li>
-	          <c:if test="${userInfo.userId>=1}">
 			          <li class="nav-item">
 			            <a class="nav-link" href="cart.html">出品待機一覧</a>
 			          </li>

@@ -28,7 +28,7 @@
           <table class="table table-bordered">
     		<c:if test="${userInfo.userId == userDate.userId}">
     		<tr>
-    			<td>ログインID(本人のみ)</td>
+    			<td>ログインID</td>
     			<td>${userDate.loginId}</td>
     		</tr>
     		</c:if>
@@ -38,7 +38,7 @@
     		</tr>
 			<c:if test="${userInfo.userId == userDate.userId}">
     		<tr>
-    			<td>生年月日(本人のみ)</td>
+    			<td>生年月日</td>
     			<td>${userDate.birthDate}</td>
     		</tr>
     		</c:if>
@@ -52,19 +52,19 @@
     		</tr>
     		<c:if test="${userInfo.userId == userDate.userId}">
     		<tr>
-    			<td>メールアドレス（本人のみ）</td>
+    			<td>メールアドレス</td>
     			<td>${userDate.mailAddress}</td>
     		</tr>
     		</c:if>
     		<c:if test="${userInfo.userId == userDate.userId}">
     		<tr>
-    			<td>住所(本人のみ)</td>
+    			<td>住所</td>
     			<td>${userDate.streetAddress}</td>
     		</tr>
     		</c:if>
     	</table>
     	<c:if test="${userInfo.userId == userDate.userId}">
-    	<p><a href="UserUpdate"><button type="button">更新画面へ</button></a>(本人のみ)</p>
+    	<p><a href="UserUpdate"><button type="button">更新画面へ</button></a></p>
       </div>
     	</c:if>
     </div><!-- /.container -->
@@ -72,14 +72,14 @@
     <div class="text-center">
     <p><a href="ExhibitList.html"><button type="button">出品物一覧</button></a></p>
 	<c:if test="${userInfo.userId == userDate.userId}">
-    	<p><a href="ExhibitStandBy.html"><button type="button">出品待機一覧</button></a>(本人のみ)</p>
+    	<p><a href="ExhibitStandBy.html"><button type="button">出品待機一覧</button></a></p>
     </c:if>
    	 <p><a href="ExhibitHistory.html"><button type="button">出品履歴一覧</button></a></p>
 	<c:if test="${userInfo.userId == userDate.userId}">
-    	<p><a href="BuyStandBy.html"><button type="button">購入待機一覧</button></a>(本人のみ)</p>
+    	<p><a href="BuyStandBy.html"><button type="button">購入待機一覧</button></a></p>
     </c:if>
     <c:if test="${userInfo.userId == userDate.userId}">
-    	<p><a href="BuyHistory.html"><button type="button">購入履歴一覧</button></a>(本人のみ)</p>
+    	<p><a href="BuyHistory.html"><button type="button">購入履歴一覧</button></a></p>
     </c:if>
     </div>
 

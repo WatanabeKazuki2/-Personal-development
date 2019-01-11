@@ -260,4 +260,53 @@ public class UserDao {
 		return userList;
 	}
 
+	public static List<UserDateBeans> UserSeach(String name) {
+        Connection conn = null;
+        List<UserDateBeans> userList = new ArrayList<UserDateBeans>();
+
+        try {
+            // データベースへ接続
+            conn = DBManager.getConnection();
+
+            // SELECT文を準備
+
+            String sql = "SELECT * FROM user_info WHERE user_name LIKE ?";
+
+            PreparedStatement pStmt = conn.prepareStatement(sql);
+
+            if(!name.isEmpty()) {
+            	pStmt.setString(1, name + "%");
+            }else {
+            	pStmt.setString(1, "" + "%");
+            }
+
+
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				 UserDateBeans udb = new UserDateBeans();
+				udb.setUserId(rs.getInt("user_id"));
+				udb.setName(rs.getString("user_name"));
+
+				userList.add(udb);
+			 }
+
+			return userList;
+
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}finally{
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO 自動生成された catch ブロック
+					e.printStackTrace();
+				}
+			}
+
+		}
+		return userList;
+	}
 }

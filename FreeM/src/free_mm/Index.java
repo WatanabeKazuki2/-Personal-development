@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.CategoryBeans;
-import dao.HeaderDao;
+import beans.CategoryDateBeans;
+import dao.CategoryDao;
 
 /**
  * Servlet implementation class Index
@@ -32,9 +32,8 @@ public class Index extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HeaderDao headerDao = new HeaderDao();
 		// カテゴリーを表示
-		List<CategoryBeans> categoryList = headerDao.CategoryList();
+		List<CategoryDateBeans> categoryList = CategoryDao.CategoryList();
 		// リクエストスコープにユーザ一覧情報をセット
 		request.setAttribute("categoryList",categoryList);
 

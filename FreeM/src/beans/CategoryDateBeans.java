@@ -1,6 +1,6 @@
 package beans;
 
-public class CategoryBeans {
+public class CategoryDateBeans {
 	private int id;
 	private String name;
 
@@ -18,7 +18,7 @@ public class CategoryBeans {
 		this.name = name;
 	}
 
-	public CategoryBeans(int id, String name){
+	public CategoryDateBeans(int id, String name){
 		this.id = id;
 		this.name = name;
 	}

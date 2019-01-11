@@ -8,16 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import base.DBManager;
-import beans.CategoryBeans;
+import beans.CategoryDateBeans;
 
-public class HeaderDao {
+public class CategoryDao {
 
 //	header用のDao
 
 //	カテゴリー検索タブ用
-	public List<CategoryBeans> CategoryList(){
+	public static List<CategoryDateBeans> CategoryList(){
 		        Connection conn = null;
-		        List<CategoryBeans> categoryList = new ArrayList<CategoryBeans>();
+		        List<CategoryDateBeans> categoryList = new ArrayList<CategoryDateBeans>();
 
 		        try {
 		            // データベースへ接続
@@ -28,7 +28,7 @@ public class HeaderDao {
 		            String sql = "SELECT * FROM category";
 
 
-		             // SELECTを実行し、結果表を取得
+		            // SELECTを実行し、結果表を取得
 		            Statement stmt = conn.createStatement();
 		            ResultSet rs = stmt.executeQuery(sql);
 
@@ -37,7 +37,7 @@ public class HeaderDao {
 		            while (rs.next()) {
 		                int id = rs.getInt("id");
 		                String name = rs.getString("name");
-		                CategoryBeans category = new CategoryBeans(id,name);
+		                CategoryDateBeans category = new CategoryDateBeans(id,name);
 
 		                categoryList.add(category);
 		            }

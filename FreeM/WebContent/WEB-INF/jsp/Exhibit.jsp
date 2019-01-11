@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,51 +8,69 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ユーザー一覧</title>
+    <title>出品画面</title>
       <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css">
     <link href="https://getbootstrap.com/docs/4.0/examples/starter-template/starter-template.css" rel="stylesheet">
   </head>
 
   <body>
 
-    <jsp:include page="/baselayout/header.jsp" />
+
+
+	<jsp:include page="/baselayout/header.jsp" />
 
     <div class="container">
 
+	<form action="Exhibit" method="post" >
       <div class="starter-template">
-        <h1>ユーザー一覧</h1>
+        <h1>商品情報を入力してください</h1>
+	<table class="table table-bordered">
+		<tr>
+			<td>商品名</td>
+			<td><input type="text" name="goodsName"></td>
+		</tr>
+		<tr>
+		    <td>商品画像</td>
+		    <td>
+				  <div class="form-group">
+				    <label for="exampleFormControlFile1"></label>
+					    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+				  </div>
+			</td>
+		</tr>
+		<tr>
+		<tr>
+			<td>カテゴリー</td>
+			<td>
+        		<select class="selectpicker">
+	        		<c:forEach var="category" items="${categoryList}">
+	 					<option value="${categiry.id}">${category.name}</option>
+	       			</c:forEach>
+              	</select>
+			</td>
+		</tr>
+		<tr>
+			<td>運送方法</td>
+			<td>
+				<select class="selectpicker">
+	        		<c:forEach var="delivery" items="${dmList}">
+	 					<option value="${delivery.deliveryId}">${delivery.deliveryName}</option>
+	       			</c:forEach>
+              	</select>
+			</td>
+		</tr>
+		<tr>
+			<td>金額</td>
+			<td><input type="text" name="value" ></td>
+		</tr>
+		<tr>
+			<td>コメント</td>
+			<td><textarea name="coment"  ></textarea></td>
+	</table>
 
-    		<form action="UserList" method="post">
-    		<div class="mx-auto" style="width: 200px;">
-				<div  class="form-inline my-2 my-lg-0">
-		            <div class = "navbar-brand">
-		                ユーザー検索
-		            </div>
-		          <div>
-		          <input class="form-control mr-sm-2" name="name" type="text" placeholder="Search" aria-label="Search">
-		          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">検索</button>
-		          </div>
-				</div>
-			</div>
-        <table class="table table-bordered">
-    		<tr>
-    			<th>ユーザー名</th>
-    			<th>出品数</th>
-    			<th></th>
-    		</tr>
-    			<c:forEach var="user" items="${userList}">
-    			<input type="hidden" name ="userId" userId="${user.userId}">
-		    		<tr>
-		    			<td>${user.name}</td>
-		    			<td>3件</td>
-		    			<td><a href="UserReference?userId=${user.userId}"><button type="button">詳細</button></a></td>
-		    		</tr>
-    			</c:forEach>
-    		</form>
-
-
-    	</table>
+	        <a href="error.html"><button type="button">登録</button></a>
       </div>
+	</form>
 
     </div><!-- /.container -->
 
