@@ -7,20 +7,44 @@ public class GoodsDateBeans {
 	private int id;
 	private String name;
 	private int categoryId;
+	private String categoryName;
 	private String detail;
 	private int price;
 	private String fileName;
 	private int byuUserId;
 	private int exibitUserId;
+	private String exibitUserName;
 	private int status;
 	private Date createDate;
 	private Date updateDate;
 	private int deliveryMethodId;
+	private String deliveryMethodName;
+
+
+
+	public String getDeliveryMethodName() {
+		return deliveryMethodName;
+	}
+	public void setDeliveryMethodName(String deliveryMethodName) {
+		this.deliveryMethodName = deliveryMethodName;
+	}
+	public String getExibitUserName() {
+		return exibitUserName;
+	}
+	public void setExibitUserName(String exibitUserName) {
+		this.exibitUserName = exibitUserName;
+	}
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 	public String getName() {
 		return name;

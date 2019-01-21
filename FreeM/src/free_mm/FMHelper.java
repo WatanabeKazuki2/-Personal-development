@@ -4,7 +4,10 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import javax.servlet.http.Part;
 import javax.xml.bind.DatatypeConverter;
 
 public class FMHelper {
@@ -58,6 +61,8 @@ public class FMHelper {
 	static final String GOODS_REFERENCE_PAGE="/WEB-INF/jsp/GoodsReference.jsp";
 //	商品更新ページ
 	static final String GOODS_UPDATE_PAGE="/WEB-INF/jsp/GoodsUpdate.jsp";
+//	完了ページ
+	static final String Complete_PAGE="/WEB-INF/jsp/Complete.jsp";
 
 	//MD5暗号化用のメソッド
 	public static String psMD5(String ps) throws NoSuchAlgorithmException {
@@ -72,5 +77,22 @@ public class FMHelper {
 		byte[] bytes = MessageDigest.getInstance(algorithm).digest(source.getBytes(charset));
 		String result = DatatypeConverter.printHexBinary(bytes);
 		return result;
+	}
+
+//	合計金額算出メソッド
+	public static int total(int goodsPrice,int deliveryPrice) {
+		int totalPrice = goodsPrice + deliveryPrice;
+		return totalPrice;
+
+	}
+
+//	画像ファイルに名前を付けるメソッド
+	public static String getFileName(Part part,int userId) {
+		Date createDate = new Date();
+		String time = new SimpleDateFormat("yyyy_MM_dd hh_mm_ss").format(createDate);
+		String id = String.valueOf(userId);
+		String fileName = id + part + time;
+		return fileName;
+
 	}
 }

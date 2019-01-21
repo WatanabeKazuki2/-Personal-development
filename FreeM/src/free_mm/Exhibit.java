@@ -5,11 +5,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import beans.CategoryDateBeans;
 import beans.DeliveryMethodDateBeans;
@@ -21,6 +23,7 @@ import dao.GoodsDao;
  * Servlet implementation class Exibit
  */
 @WebServlet("/Exhibit")
+@MultipartConfig(location="/img", maxFileSize=1048576)
 public class Exhibit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -65,15 +68,23 @@ public class Exhibit extends HttpServlet {
 		int userId = (int) session.getAttribute("userId");
 		request.getAttribute("userId");
 //		jspの値を取得
-		String goodsName = request.getParameter("");
-		String fileName = request.getParameter("");
-		int categoryId = Integer.parseInt(request.getParameter(""));
-		int deliverId = Integer.parseInt(request.getParameter(""));
-		int price = Integer.parseInt(request.getParameter(""));
-		String coment = request.getParameter("");
+		String goodsName = request.getParameter("goodsName");
+		Part part = request.getPart("fileName");
+		int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+		int deliverId = Integer.parseInt(request.getParameter("deliveryId"));
+		int price = Integer.parseInt(request.getParameter("price"));
+		String coment = request.getParameter("coment");
+
+//		画像ファイルを保存する
+		String fileName = FMHelper.getFileName(part,userId);
+
+		part.write(getServletContext().getRealPath("/WebContent/img") + "/" + fileName);
+
 
 		try {
 			GoodsDao.Exhibit(userId,goodsName,fileName,categoryId,deliverId,price,coment);
+
+			response.sendRedirect("Complete");
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();

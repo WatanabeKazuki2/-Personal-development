@@ -8,48 +8,45 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ホーム画面</title>
+    <title>購入画面</title>
       <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css">
     <link href="https://getbootstrap.com/docs/4.0/examples/starter-template/starter-template.css" rel="stylesheet">
   </head>
 
   <body>
-		<jsp:include page="/baselayout/index_header.jsp" />
 
-	<form action="Index" method="post">
+    <jsp:include page="/baselayout/index_header.jsp" />
+
     <div class="container">
 
       <div class="starter-template">
-        <h1>フリーMM</h1>
-      </div>
-      <div class="center-block">
-      <div class="text-center">
-      <div class="row center">
-      <h3>おすすめ出品</h3>
+        <h1>商品検索一覧</h1>
+	<table class="table table-bordered">
+		<tr>
+		    <th></th>
+			<th>商品名</th>
+			<th>カテゴリー</th>
+			<th>配送方法</th>
+			<th>小計</th>
+			<th></th>
+		</tr>
+		<tr>
+		    <td> <img src="../../img/mig.jpg" alt="" width="110" height="150"></td>
+			<td>ただのドア</td>
+			<td>家具</td>
+			<td>ゆうパック</td>
+			<td>2500円</td>
+			<td>
+			    <a href="GoodsReference.html"><button type="button">詳細</button></a>
+			    <a href="cart.html"><button type="button">カートへ</button></a>
+		    </td>
+		</tr>
+	</table>
+
       </div>
 
-      <div class="row">
-	  <c:forEach var="goods" items="${goodsList}">
-      <div class="card">
-          <div class="cart-image">
-              <a href="GoodsReference.html"><img src="img/${goods.fileName}" alt="" width="200" height="300"></a>
-                  <div class="card-content">
-                      <span class="card-title">${goods.name}</span>
-                      <p>カテゴリー：${goods.categoryName}</p>
-                      <p>小計：${goods.price}円</p>
-                      <p>出品者：${goods.exibitUserName}</p>
-                  </div>
-          </div>
-       </div>
-	  </c:forEach>
-      </div>
-
-
-       </div>
-      </div>
     </div><!-- /.container -->
 
-	</form>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

@@ -21,7 +21,7 @@
 
     <div class="container">
 
-	<form action="Exhibit" method="post" >
+	<form action="Exhibit" method="post" enctype="multipart/form-data">
       <div class="starter-template">
         <h1>商品情報を入力してください</h1>
 	<table class="table table-bordered">
@@ -34,7 +34,7 @@
 		    <td>
 				  <div class="form-group">
 				    <label for="exampleFormControlFile1"></label>
-					    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+					    <input type="file"  name="fileName" class="form-control-file" id="exampleFormControlFile1">
 				  </div>
 			</td>
 		</tr>
@@ -42,9 +42,9 @@
 		<tr>
 			<td>カテゴリー</td>
 			<td>
-        		<select class="selectpicker">
+        		<select class="selectpicker" name="categoryId">
 	        		<c:forEach var="category" items="${categoryList}">
-	 					<option value="${categiry.id}">${category.name}</option>
+	 					<option value="${category.id}">${category.name}</option>
 	       			</c:forEach>
               	</select>
 			</td>
@@ -52,7 +52,7 @@
 		<tr>
 			<td>運送方法</td>
 			<td>
-				<select class="selectpicker">
+				<select class="selectpicker" name="deliveryId">
 	        		<c:forEach var="delivery" items="${dmList}">
 	 					<option value="${delivery.deliveryId}">${delivery.deliveryName}</option>
 	       			</c:forEach>
@@ -61,14 +61,14 @@
 		</tr>
 		<tr>
 			<td>金額</td>
-			<td><input type="text" name="value" ></td>
+			<td><input type="text" name="price" ></td>
 		</tr>
 		<tr>
 			<td>コメント</td>
-			<td><textarea name="coment"  ></textarea></td>
+			<td><textarea name="coment"></textarea></td>
 	</table>
 
-	        <a href="error.html"><button type="button">登録</button></a>
+	        <button type="submit">登録</button>
       </div>
 	</form>
 

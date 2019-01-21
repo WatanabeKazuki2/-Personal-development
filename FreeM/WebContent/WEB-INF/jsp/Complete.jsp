@@ -8,48 +8,28 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ホーム画面</title>
+    <title>エラー画面</title>
       <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css">
     <link href="https://getbootstrap.com/docs/4.0/examples/starter-template/starter-template.css" rel="stylesheet">
   </head>
 
   <body>
-		<jsp:include page="/baselayout/index_header.jsp" />
 
-	<form action="Index" method="post">
+    <jsp:include page="/baselayout/header.jsp" />
+
     <div class="container">
 
-      <div class="starter-template">
-        <h1>フリーMM</h1>
-      </div>
-      <div class="center-block">
-      <div class="text-center">
-      <div class="row center">
-      <h3>おすすめ出品</h3>
-      </div>
-
-      <div class="row">
-	  <c:forEach var="goods" items="${goodsList}">
-      <div class="card">
-          <div class="cart-image">
-              <a href="GoodsReference.html"><img src="img/${goods.fileName}" alt="" width="200" height="300"></a>
-                  <div class="card-content">
-                      <span class="card-title">${goods.name}</span>
-                      <p>カテゴリー：${goods.categoryName}</p>
-                      <p>小計：${goods.price}円</p>
-                      <p>出品者：${goods.exibitUserName}</p>
-                  </div>
-          </div>
-       </div>
-	  </c:forEach>
-      </div>
-
-
-       </div>
-      </div>
+  		<div class="starter-template">
+          <div class="alert alert-success" role="alert">
+                <h1>完了しました！</h1>
+            </div>
+    <div class="mx-auto">
+    	<a href="Index"><button class="btn btn-secondary" type="button">ホームヘ</button></a>
+    </div>
+      	</div>
     </div><!-- /.container -->
 
-	</form>
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
