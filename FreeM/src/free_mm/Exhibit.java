@@ -23,17 +23,17 @@ import dao.GoodsDao;
  * Servlet implementation class Exibit
  */
 @WebServlet("/Exhibit")
-@MultipartConfig(location="/img", maxFileSize=1048576)
+@MultipartConfig(location="/tmp", maxFileSize=1048576)
 public class Exhibit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Exhibit() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public Exhibit() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -76,9 +76,9 @@ public class Exhibit extends HttpServlet {
 		String coment = request.getParameter("coment");
 
 //		画像ファイルを保存する
-		String fileName = FMHelper.getFileName(part,userId);
+		String fileName = this.getFileName(part);
 
-		part.write(getServletContext().getRealPath("/WebContent/img") + "/" + fileName);
+		part.write(getServletContext().getRealPath("/img") + "/" + fileName);
 
 
 		try {
@@ -90,6 +90,18 @@ public class Exhibit extends HttpServlet {
 			e.printStackTrace();
 		}
 
+	}
+
+	private String getFileName(Part part) {
+		String name = null;
+		for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
+			if (dispotion.trim().startsWith("filename")) {
+				name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
+				name = name.substring(name.lastIndexOf("\\") + 1);
+				break;
+			}
+		}
+		return name;
 	}
 
 }

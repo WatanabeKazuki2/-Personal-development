@@ -18,33 +18,38 @@
     <jsp:include page="/baselayout/index_header.jsp" />
 
     <div class="container">
-
+	<form action="Index" method="post">
       <div class="starter-template">
         <h1>商品検索一覧</h1>
 	<table class="table table-bordered">
 		<tr>
 		    <th></th>
 			<th>商品名</th>
+			<th>出品ユーザー</th>
 			<th>カテゴリー</th>
 			<th>配送方法</th>
 			<th>小計</th>
 			<th></th>
 		</tr>
+		<c:forEach var="gList" items="${gList}">
 		<tr>
-		    <td> <img src="../../img/mig.jpg" alt="" width="110" height="150"></td>
-			<td>ただのドア</td>
-			<td>家具</td>
-			<td>ゆうパック</td>
-			<td>2500円</td>
+		    <td> <img src="img/${gList.fileName}" alt="" width="110" height="150"></td>
+			<td>${gList.name}</td>
+			<td>${gList.exibitUserName}</td>
+			<td>${gList.categoryName}</td>
+			<td>${gList.deliveryMethodName}</td>
+			<td>${gList.price}円</td>
 			<td>
 			    <a href="GoodsReference.html"><button type="button">詳細</button></a>
 			    <a href="cart.html"><button type="button">カートへ</button></a>
 		    </td>
 		</tr>
+		</c:forEach>
 	</table>
 
       </div>
 
+	</form>
     </div><!-- /.container -->
 
 

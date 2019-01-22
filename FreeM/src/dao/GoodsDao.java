@@ -54,9 +54,25 @@ public class GoodsDao {
 		Connection conn = DBManager.getConnection();
 
 		try {
-			PreparedStatement pStmt = conn.prepareStatement("");
-
-			pStmt.setString(1,"%" + name + "%");
+			PreparedStatement pStmt = conn.prepareStatement("SELECT f_item.*,\r\n" +
+					"category.name,\r\n" +
+					"f_delivery_method.name,\r\n" +
+					"user_info.user_name\r\n" +
+					"FROM f_item INNER JOIN category\r\n" +
+					"ON f_item.category_id = category.id\r\n" +
+					"INNER JOIN user_info\r\n" +
+					"ON f_item.exibit_user_id=user_info.user_id\r\n" +
+					"INNER JOIN f_delivery_method\r\n" +
+					"ON f_item.delivery_method_id=f_delivery_method.id\r\n" +
+					"WHERE\r\n" +
+					"f_item.status=1\r\n" +
+					"AND\r\n" +
+					"f_item.name LIKE ?;");
+			 if(!name.isEmpty()) {
+				 pStmt.setString(1,"%" + name + "%");
+			 }else {
+				 pStmt.setString(1,"%" + "" + "%");
+			 }
 
 			ResultSet rs = pStmt.executeQuery();
 
@@ -64,17 +80,20 @@ public class GoodsDao {
 
 			while(rs.next()) {
 				GoodsDateBeans gdb = new GoodsDateBeans();
-				gdb.setFileName(rs.getString(""));
-				gdb.setName(rs.getString(""));
-				gdb.setCategoryName(rs.getString(""));
-				gdb.setDeliveryMethodName(rs.getString(""));
-				gdb.setPrice(rs.getInt(""));
+				gdb.setFileName(rs.getString("f_item.file_name"));
+				gdb.setName(rs.getString("f_item.name"));
+				gdb.setExibitUserName(rs.getString("user_info.user_name"));
+				gdb.setCategoryName(rs.getString("category.name"));
+				gdb.setDeliveryMethodName(rs.getString("f_delivery_method.name"));
+				gdb.setPrice(rs.getInt("f_item.price"));
 				goodsList.add(gdb);
 			}
 			return goodsList;
 
 		}finally {
-
+			if (conn != null) {
+				conn.close();
+			}
 		}
 
 

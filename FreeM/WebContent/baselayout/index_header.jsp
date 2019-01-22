@@ -50,7 +50,7 @@
 	          </li>
 	        </ul>
 	</div>
-        <form action="index.java" method="post" class="form-inline my-2 my-lg-0" >
+        <form action="Index" method="post" class="form-inline my-2 my-lg-0" >
         <select class="selectpicker">
         <c:forEach var="category" items="${categoryList}">
 	              <option value="${categiry.id}">${category.name}</option>
@@ -59,7 +59,7 @@
             <div class = "navbar-brand">
                 出品検索
             </div>
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <a href="GoodsList.html"><button class="btn btn-outline-success my-2 my-sm-0" type="button">検索</button></a>
+          <input class="form-control mr-sm-2" type="text" name="seach" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">検索</button>
         </form>
 </nav>

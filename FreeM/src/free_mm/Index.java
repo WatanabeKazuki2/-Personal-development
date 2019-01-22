@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.CategoryDateBeans;
 import beans.GoodsDateBeans;
@@ -35,11 +36,17 @@ public class Index extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
 		try {
 			// カテゴリーを表示
 			List<CategoryDateBeans> categoryList = CategoryDao.CategoryList();
 //		TOPページに商品をランダムで4つ表示
 			List<GoodsDateBeans> goods = GoodsDao.IndexGoods(4);
+
+			String searchWord = (String)session.getAttribute("searchWord");
+			if(searchWord != null) {
+				session.removeAttribute("searchWord");
+			}
 
 			// リクエストスコープ情報をセット
 			request.setAttribute("goodsList", goods);
@@ -58,8 +65,17 @@ public class Index extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+
+		String seachWord = request.getParameter("seach");
+
+		session.setAttribute("seachWord", seachWord);
+
+		// ユーザ一覧のサーブレットにリダイレクト
+		response.sendRedirect("GoodsList");
+
+
 	}
 
 }
