@@ -402,12 +402,12 @@ public class GoodsDao {
 //		UPDATE文を準備
 			PreparedStatement pStmt = conn.prepareStatement("UPDATE f_item "
 					+ "SET "
-					+ "name=? "
-					+ "file_name=? "
-					+ "category_id=? "
-					+ "detail=? "
-					+ "price=? "
-					+ "delivery_method_id=? "
+					+ "name=?,"
+					+ "file_name=?,"
+					+ "category_id=?, "
+					+ "detail=?, "
+					+ "price=?, "
+					+ "delivery_method_id=?, "
 					+ "update_date=now() "
 					+ "WHERE "
 					+ "id=? AND exibit_user_id=?");

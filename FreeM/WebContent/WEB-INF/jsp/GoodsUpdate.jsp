@@ -17,7 +17,7 @@
 
 	<jsp:include page="/baselayout/header.jsp" />
 
-	<form action="GoodsUpdate" method="post">
+	<form action="GoodsUpdate" method="post" enctype="multipart/form-data">
     <div class="container">
 
       <div class="starter-template">
@@ -31,32 +31,31 @@
 		<tr>
 		    <td>商品画像</td>
 		    <td>
-		    <form>
 				  <div class="form-group">
 				    <label for="exampleFormControlFile1"></label>
-					    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+					    <input type="file" class="form-control-file" name="fileName" id="exampleFormControlFile1">
 				  </div>
-				</form>
 			</td>
 		</tr>
 		<tr>
 		<tr>
 			<td>カテゴリー</td>
 			<td>
-			        <select class="selectpicker">
+			        <select class="selectpicker" name="categoryId" >
 				        <c:forEach var="category" items="${categoryList}">
 					        <option value="${categiry.id}">${category.name}</option>
 				       </c:forEach>
+				    </select>
 			</td>
 		</tr>
 		<tr>
 			<td>運送方法</td>
-			 <form action="Index" method="post" class="form-inline my-2 my-lg-0" >
 		        <td>
 		        	<select class="selectpicker" name="deliveryId">
 	        		<c:forEach var="delivery" items="${dmdList}">
 	 					<option value="${delivery.deliveryId}">${delivery.deliveryName}</option>
 	       			</c:forEach>
+	       			</select>
 		        </td>
 		</tr>
 		<tr>
