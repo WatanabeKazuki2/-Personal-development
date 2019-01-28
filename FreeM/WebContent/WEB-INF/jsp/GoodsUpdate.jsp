@@ -8,50 +8,72 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>購入画面</title>
+    <title>出品画面</title>
       <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css">
     <link href="https://getbootstrap.com/docs/4.0/examples/starter-template/starter-template.css" rel="stylesheet">
   </head>
 
   <body>
 
-    <jsp:include page="/baselayout/index_header.jsp" />
+	<jsp:include page="/baselayout/header.jsp" />
 
+	<form action="GoodsUpdate" method="post">
     <div class="container">
-	<form action="Index" method="post">
+
       <div class="starter-template">
-        <h1>商品検索一覧</h1>
+        <h1>編集内容を入力してください</h1>
+        <input type="hidden" name="goodsId" value="${gdb.id}">
 	<table class="table table-bordered">
 		<tr>
-		    <th></th>
-			<th>商品名</th>
-			<th>出品ユーザー</th>
-			<th>カテゴリー</th>
-			<th>配送方法</th>
-			<th>小計</th>
-			<th></th>
+			<td>商品名</td>
+			<td><input type="text" name="goodsName" value="${gdb.name}"></td>
 		</tr>
-		<c:forEach var="gList" items="${gList}">
-		<input type="hidden" name="goodsId" goodsId="${gList.id}">
 		<tr>
-		    <td> <img src="img/${gList.fileName}" alt="" width="110" height="150"></td>
-			<td>${gList.name}</td>
-			<td>${gList.exibitUserName}</td>
-			<td>${gList.categoryName}</td>
-			<td>${gList.deliveryMethodName}</td>
-			<td>${gList.price}円</td>
-			<td>
-			    <a href="GoodsReference?goodsId=${gList.id}"><button type="button">詳細</button></a>
-		    </td>
+		    <td>商品画像</td>
+		    <td>
+		    <form>
+				  <div class="form-group">
+				    <label for="exampleFormControlFile1"></label>
+					    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+				  </div>
+				</form>
+			</td>
 		</tr>
-		</c:forEach>
+		<tr>
+		<tr>
+			<td>カテゴリー</td>
+			<td>
+			        <select class="selectpicker">
+				        <c:forEach var="category" items="${categoryList}">
+					        <option value="${categiry.id}">${category.name}</option>
+				       </c:forEach>
+			</td>
+		</tr>
+		<tr>
+			<td>運送方法</td>
+			 <form action="Index" method="post" class="form-inline my-2 my-lg-0" >
+		        <td>
+		        	<select class="selectpicker" name="deliveryId">
+	        		<c:forEach var="delivery" items="${dmdList}">
+	 					<option value="${delivery.deliveryId}">${delivery.deliveryName}</option>
+	       			</c:forEach>
+		        </td>
+		</tr>
+		<tr>
+			<td>金額</td>
+			<td><input type="text" name="price" value="${gdb.price}"></td>
+		</tr>
+		<tr>
+			<td>コメント</td>
+			<td><textarea name="detail" value="${gdb.detail}" ></textarea></td>
 	</table>
 
+	        <button type="submit">更新</button>
       </div>
 
-	</form>
     </div><!-- /.container -->
 
+	</form>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -61,3 +83,4 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
   </body>
 </html>
+

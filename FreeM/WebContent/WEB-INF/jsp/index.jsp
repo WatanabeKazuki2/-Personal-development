@@ -30,9 +30,10 @@
 
       <div class="row">
 	  <c:forEach var="goods" items="${goodsList}">
+	  <input type="hidden" name="goodsId" goodsId="${goods.id}">
       <div class="card">
           <div class="cart-image">
-              <a href="GoodsReference.html"><img src="img/${goods.fileName}" alt="" width="200" height="300"></a>
+              <a href="GoodsReference?goodsId=${goods.id}"><img src="img/${goods.fileName}" alt="" width="200" height="300"></a>
                   <div class="card-content">
                       <span class="card-title">${goods.name}</span>
                       <p>カテゴリー：${goods.categoryName}</p>

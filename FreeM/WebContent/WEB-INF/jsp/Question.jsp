@@ -15,41 +15,40 @@
 
   <body>
 
-    <jsp:include page="/baselayout/index_header.jsp" />
+	<jsp:include page="/baselayout/header.jsp" />
 
     <div class="container">
-	<form action="Index" method="post">
+
+    <form action="Question" method="post">
+
       <div class="starter-template">
-        <h1>商品検索一覧</h1>
+        <h1>この商品の購入を申請しますか？</h1>
+		<input type="hidden" name="goodsId" goodsId="${gr.id}">
 	<table class="table table-bordered">
 		<tr>
-		    <th></th>
 			<th>商品名</th>
-			<th>出品ユーザー</th>
-			<th>カテゴリー</th>
+			<th>出品者名</th>
+			<th>単価</th>
 			<th>配送方法</th>
+			<th>配送金額</th>
 			<th>小計</th>
-			<th></th>
 		</tr>
-		<c:forEach var="gList" items="${gList}">
-		<input type="hidden" name="goodsId" goodsId="${gList.id}">
 		<tr>
-		    <td> <img src="img/${gList.fileName}" alt="" width="110" height="150"></td>
-			<td>${gList.name}</td>
-			<td>${gList.exibitUserName}</td>
-			<td>${gList.categoryName}</td>
-			<td>${gList.deliveryMethodName}</td>
-			<td>${gList.price}円</td>
-			<td>
-			    <a href="GoodsReference?goodsId=${gList.id}"><button type="button">詳細</button></a>
-		    </td>
+			<td>${gr.name}</td>
+			<td>${gr.exibitUserName}</td>
+			<td>${gr.price}円</td>
+			<td>${gr.deliveryMethodName}</td>
+			<td>${gr.deliveryMethodPrice}円</td>
+			<td>${tp}円</td>
 		</tr>
-		</c:forEach>
 	</table>
 
+	        <button type="submit">確定する</button>
+	        <a href="Index"><button type="button">キャンセル</button></a>
       </div>
 
-	</form>
+    </form>
+
     </div><!-- /.container -->
 
 

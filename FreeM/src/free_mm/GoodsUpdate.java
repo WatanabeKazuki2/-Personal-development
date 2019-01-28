@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,47 +14,54 @@ import javax.servlet.http.Part;
 
 import beans.CategoryDateBeans;
 import beans.DeliveryMethodDateBeans;
+import beans.GoodsDateBeans;
 import dao.CategoryDao;
 import dao.DeliveryMethodDao;
 import dao.GoodsDao;
 
 /**
- * Servlet implementation class Exibit
+ * Servlet implementation class GoodsUpdate
  */
-@WebServlet("/Exhibit")
-@MultipartConfig(location="C:\\Users\\LIKEIT_STUDENT\\Documents\\-Personal-development\\FreeM\\WebContent\\img", maxFileSize=1048576)
-public class Exhibit extends HttpServlet {
+@WebServlet("/GoodsUpdate")
+public class GoodsUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public Exhibit() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public GoodsUpdate() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		URLから商品IDのを取得
+		int goodsId = Integer.parseInt(request.getParameter("goodsId"));
 
 		try {
-			// カテゴリーリストを取得
+//			商品情報取得
+			GoodsDateBeans gdb = GoodsDao.GR(goodsId);
+//			カテゴリー一覧を取得
 			List<CategoryDateBeans> categoryList = CategoryDao.CategoryList();
-//			運送リストを取得
-			List<DeliveryMethodDateBeans> dmList = DeliveryMethodDao.DMD();
-			// リクエストスコープにカテゴリー情報をセット
-			request.setAttribute("categoryList",categoryList);
-			// リクエストスコープに運送情報をセット
-			request.setAttribute("dmList", dmList);
+//			運送情報一覧を取得
+			List<DeliveryMethodDateBeans> dmdList = DeliveryMethodDao.DMD();
+
+//			jspに各情報をセット
+			request.setAttribute("gdb", gdb);
+			request.setAttribute("categoryList", categoryList);
+			request.setAttribute("dmdList",dmdList);
 
 			// フォワード
-			request.getRequestDispatcher(FMHelper.EXHIBIT_PAGE).forward(request, response);
+			request.getRequestDispatcher(FMHelper.GOODS_UPDATE_PAGE).forward(request, response);
+
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
+
 	}
 
 	/**
@@ -64,25 +70,23 @@ public class Exhibit extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
-//		セッションから自身のIDを取得
+
+//		セッションからユーザーIDを取得（ログインユーザー特定）
 		int userId = (int) session.getAttribute("userId");
-		request.getAttribute("userId");
+
 //		jspの値を取得
+		int goodsId = Integer.parseInt(request.getParameter("goodsId"));
 		String goodsName = request.getParameter("goodsName");
 		Part part = request.getPart("fileName");
 		int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-		int deliverId = Integer.parseInt(request.getParameter("deliveryId"));
+		int deliveryMethodId = Integer.parseInt(request.getParameter("deliveryId"));
 		int price = Integer.parseInt(request.getParameter("price"));
-		String coment = request.getParameter("coment");
+		String detail = request.getParameter("coment");
 
-//		画像ファイルを保存する
-		String fileName = this.getFileName(part);
-
-		part.write(fileName);
-
+		String fileName = FMHelper.getFileName(part, userId);
 
 		try {
-			GoodsDao.Exhibit(userId,goodsName,fileName,categoryId,deliverId,price,coment);
+			GoodsDao.GoodsUpdate(goodsName, fileName, categoryId, detail, price, deliveryMethodId, goodsId, userId);
 
 			response.sendRedirect("Complete");
 		} catch (SQLException e) {
@@ -90,18 +94,6 @@ public class Exhibit extends HttpServlet {
 			e.printStackTrace();
 		}
 
-	}
-
-	private String getFileName(Part part) {
-		String name = null;
-		for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
-			if (dispotion.trim().startsWith("filename")) {
-				name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
-				name = name.substring(name.lastIndexOf("\\") + 1);
-				break;
-			}
-		}
-		return name;
 	}
 
 }

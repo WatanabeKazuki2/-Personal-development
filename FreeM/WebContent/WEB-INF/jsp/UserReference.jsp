@@ -70,13 +70,13 @@
     </div><!-- /.container -->
 
     <div class="text-center">
-    <p><a href="ExhibitList.html"><button type="button">出品物一覧</button></a></p>
+    <p><a href="ExhibitList?userId=${userInfo.userId}"><button type="button">出品物一覧</button></a></p>
 	<c:if test="${userInfo.userId == userDate.userId}">
-    	<p><a href="ExhibitStandBy.html"><button type="button">出品待機一覧</button></a></p>
+    	<p><a href="ExhibitStandBy?userId=${userInfo.userId}"><button type="button">出品待機一覧</button></a></p>
     </c:if>
    	 <p><a href="ExhibitHistory.html"><button type="button">出品履歴一覧</button></a></p>
 	<c:if test="${userInfo.userId == userDate.userId}">
-    	<p><a href="BuyStandBy.html"><button type="button">購入待機一覧</button></a></p>
+    	<p><a href="BuyStandBy?userId=${userInfo.userId}"><button type="button">購入待機一覧</button></a></p>
     </c:if>
     <c:if test="${userInfo.userId == userDate.userId}">
     	<p><a href="BuyHistory.html"><button type="button">購入履歴一覧</button></a></p>

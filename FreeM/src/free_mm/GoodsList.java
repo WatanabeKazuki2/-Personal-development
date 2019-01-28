@@ -3,6 +3,7 @@ package free_mm;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.CategoryDateBeans;
 import beans.GoodsDateBeans;
+import dao.CategoryDao;
 import dao.GoodsDao;
 
 /**
@@ -37,12 +40,14 @@ public class GoodsList extends HttpServlet {
 //		検索ワードをセッションから取得
 		String seach=(String) session.getAttribute("seachWord");
 		try {
+			// カテゴリーを表示
+			List<CategoryDateBeans> categoryList = CategoryDao.CategoryList();
 
 			ArrayList<GoodsDateBeans> gList = GoodsDao.seachGoods(seach);
 
 			//		jspにサーチワードをセット
 			request.setAttribute("gList", gList);
-
+			request.setAttribute("categoryList",categoryList);
 			// フォワード
 			request.getRequestDispatcher(FMHelper.GOODS_LIST_PAGE).forward(request, response);
 

@@ -19,9 +19,22 @@ public class GoodsDateBeans {
 	private Date updateDate;
 	private int deliveryMethodId;
 	private String deliveryMethodName;
+	private int deliveryMethodPrice;
+	private int totalPrice;
 
 
-
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	public int getDeliveryMethodPrice() {
+		return deliveryMethodPrice;
+	}
+	public void setDeliveryMethodPrice(int deliveryMethodPrice) {
+		this.deliveryMethodPrice = deliveryMethodPrice;
+	}
 	public String getDeliveryMethodName() {
 		return deliveryMethodName;
 	}
