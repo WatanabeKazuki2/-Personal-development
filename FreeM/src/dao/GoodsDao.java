@@ -435,4 +435,33 @@ public class GoodsDao {
 		}
 
 	}
+
+//	商品削除用
+	public static void GoodsDelete(int userId,int goodsId) throws SQLException {
+		Connection conn = DBManager.getConnection();
+
+		try {
+//			DELETE文を準備
+			PreparedStatement pStmt = conn.prepareStatement("DELETE FROM f_item"
+					+ "WHERE "
+					+ "exibit_user_id=? AND id=?");
+//			？に値をセット
+			pStmt.setInt(1,userId);
+			pStmt.setInt(2, goodsId);
+
+			pStmt.executeUpdate();
+
+//			DBを閉じる
+			conn.close();
+
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+	}
+
 }
