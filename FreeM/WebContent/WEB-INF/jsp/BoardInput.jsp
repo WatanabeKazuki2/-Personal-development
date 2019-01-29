@@ -8,54 +8,34 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>出品物リスト画面</title>
+    <title>チャット入力画面</title>
       <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css">
     <link href="https://getbootstrap.com/docs/4.0/examples/starter-template/starter-template.css" rel="stylesheet">
   </head>
 
+
+
   <body>
 
-    <jsp:include page="/baselayout/header.jsp" />
+	    <jsp:include page="/baselayout/header.jsp" />
 
-	<form action="ExhibitList" method="post">
+	<form action="BoardInput" method="post">
 
-    <div class="text-center">
-    <h1>出品物一覧</h1>
-    </div>
-        <div class="mx-auto" >
-    <table class="table table-bordered">
-        <tr>
-        	<th></th>
-            <th>商品名</th>
-            <th>カテゴリー</th>
-            <th>配送方法</th>
-            <th>小計</th>
-            <th></th>
-        </tr>
+	<input type="hidden" name="goodsId" value="${gid}">
 
-        <c:forEach var="el" items="${EL}">
+    <div class="container">
 
-		<input type="hidden" name="goodsId" value="${el.id}">
-
-        <tr>
-        <td> <img src="img/${el.fileName}" alt="" width="110" height="150"></td>
-        <td>${el.name}</td>
-        <td>${el.categoryName}</td>
-        <td>${el.deliveryMethodName}</td>
-        <td>${el.price}</td>
-        <td>
-            <a href="GoodsReference?goodsId=${el.id}"><button type="button">詳細</button></a>
-            <a href="GoodsUpdate?goodsId=${el.id}"><button type="button">更新</button></a>
-            <a href="GoodsDelete?goodsId=${el.id}"><button type="button">削除</button></a>
-        </td>
-        </tr>
-        </c:forEach>
-    </table>
-		<INPUT type="button" value="戻る" onClick="history.go(-1)">
-        </div>
+      <div class="starter-template">
+        <h1>チャット文を入力してください</h1>
+        <div class="form-group">
+    		<textarea class="form-control" name="comment" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+        <button type="submit">送信</button>
+      </div>
+	<INPUT type="button" value="戻る" onClick="history.go(-1)">
+    </div><!-- /.container -->
 
 	</form>
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

@@ -442,12 +442,12 @@ public class GoodsDao {
 
 		try {
 //			DELETE文を準備
-			PreparedStatement pStmt = conn.prepareStatement("DELETE FROM f_item"
+			PreparedStatement pStmt = conn.prepareStatement("DELETE FROM f_item "
 					+ "WHERE "
-					+ "exibit_user_id=? AND id=?");
+					+ "exibit_user_id=? AND id=?;");
 //			？に値をセット
 			pStmt.setInt(1,userId);
-			pStmt.setInt(2, goodsId);
+			pStmt.setInt(2,goodsId);
 
 			pStmt.executeUpdate();
 

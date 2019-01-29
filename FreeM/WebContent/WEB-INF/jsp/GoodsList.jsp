@@ -32,7 +32,7 @@
 			<th></th>
 		</tr>
 		<c:forEach var="gList" items="${gList}">
-		<input type="hidden" name="goodsId" goodsId="${gList.id}">
+		<input type="hidden" name="goodsId" value="${gList.id}">
 		<tr>
 		    <td> <img src="img/${gList.fileName}" alt="" width="110" height="150"></td>
 			<td>${gList.name}</td>

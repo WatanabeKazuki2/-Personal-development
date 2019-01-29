@@ -8,53 +8,59 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>出品物リスト画面</title>
+    <title>商談画面</title>
       <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css">
     <link href="https://getbootstrap.com/docs/4.0/examples/starter-template/starter-template.css" rel="stylesheet">
   </head>
 
   <body>
 
-    <jsp:include page="/baselayout/header.jsp" />
-
-	<form action="ExhibitList" method="post">
+	<jsp:include page="/baselayout/header.jsp" />
 
     <div class="text-center">
-    <h1>出品物一覧</h1>
+
+    <form action="GoodsBoad" method="post">
+
+    <h1>商談掲示板</h1>
     </div>
         <div class="mx-auto" >
+        <input type="hidden" name="goodsId" value="${gdb.id}">
     <table class="table table-bordered">
         <tr>
-        	<th></th>
+            <th></th>
             <th>商品名</th>
-            <th>カテゴリー</th>
+            <th>ユーザー名</th>
             <th>配送方法</th>
             <th>小計</th>
-            <th></th>
         </tr>
-
-        <c:forEach var="el" items="${EL}">
-
-		<input type="hidden" name="goodsId" value="${el.id}">
-
         <tr>
-        <td> <img src="img/${el.fileName}" alt="" width="110" height="150"></td>
-        <td>${el.name}</td>
-        <td>${el.categoryName}</td>
-        <td>${el.deliveryMethodName}</td>
-        <td>${el.price}</td>
-        <td>
-            <a href="GoodsReference?goodsId=${el.id}"><button type="button">詳細</button></a>
-            <a href="GoodsUpdate?goodsId=${el.id}"><button type="button">更新</button></a>
-            <a href="GoodsDelete?goodsId=${el.id}"><button type="button">削除</button></a>
-        </td>
+        <td><img src="img/${gdb.fileName}" alt="" width="110" height="150"></td>
+        <td>${gdb.name}</td>
+        <td>${gdb.exibitUserName}</td>
+        <td>${gdb.deliveryMethodName}</td>
+        <td>${tp}円</td>
         </tr>
-        </c:forEach>
     </table>
-		<INPUT type="button" value="戻る" onClick="history.go(-1)">
-        </div>
+    <div class="text-center">
+    <a href="ChatFinal.html"><button type="button">成立</button></a>
+    </div>
+    </div>
 
-	</form>
+    <div class="text-center">
+        <h3>掲示板</h3>
+        <a href="BoardInput?goodsId=${gdb.id}"><button type="button">掲示板に記入</button></a>
+    </div>
+    <table>
+    	<c:forEach var="bdb" items="${bdbList}">
+	        <tr>
+	            <td>${bdb.userName}</td>
+	            <td>${bdb.boadComment}</td>
+	            <td>${bdb.createDate}</td>
+	        </tr>
+    	</c:forEach>
+    </table>
+
+    </form>
 
 
     <!-- Bootstrap core JavaScript

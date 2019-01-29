@@ -17,13 +17,17 @@
 
 	<jsp:include page="/baselayout/header.jsp" />
 
+	<form action="GoodsDelete" method="post">
+
     <div class="container">
 
       <div class="starter-template">
           <div class="alert alert-danger" role="alert">
                 <h1>本当に削除しますか？</h1>
             </div>
+            <input type="hidden" name="goodsId" value="${gdb.id}">
 <table class="table table-bordered">
+
 		<tr>
 			<th>商品名</th>
 			<th>単価</th>
@@ -32,19 +36,20 @@
 			<th>小計</th>
 		</tr>
 		<tr>
-			<td>ただのドア</td>
-			<td>1500円</td>
-			<td>ゆうパック</td>
-			<td>1000円</td>
-			<td>2500円</td>
+			<td>${gdb.name}</td>
+			<td>${gdb.price}円</td>
+			<td>${gdb.deliveryMethodName}</td>
+			<td>${gdb.deliveryMethodPrice}円</td>
+			<td>${tp}円</td>
 		</tr>
 	</table>
-        <a href="error.html"><button type="button">はい</button></a>
-        <a href="UserReference.html"><button type="button">キャンセル</button></a>
+        <button type="submit">はい</button>
+		<INPUT type="button" value="キャンセル" onClick="history.go(-1)">
       </div>
 
     </div><!-- /.container -->
 
+	</form>
 
 
     <!-- Bootstrap core JavaScript

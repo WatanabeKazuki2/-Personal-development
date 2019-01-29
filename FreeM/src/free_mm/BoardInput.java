@@ -10,20 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beans.GoodsDateBeans;
-import dao.GoodsDao;
+import dao.BoardDao;
 
 /**
- * Servlet implementation class GoodsDelete
+ * Servlet implementation class BoardInput
  */
-@WebServlet("/GoodsDelete")
-public class GoodsDelete extends HttpServlet {
+@WebServlet("/BoardInput")
+public class BoardInput extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GoodsDelete() {
+    public BoardInput() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,20 +34,9 @@ public class GoodsDelete extends HttpServlet {
 
 		int goodsId = Integer.parseInt(request.getParameter("goodsId"));
 
-		try {
-			GoodsDateBeans gdb = GoodsDao.GR(goodsId);
-
-//			合計金額算出
-			int total = FMHelper.total(gdb.getPrice(), gdb.getDeliveryMethodPrice());
-
-			request.setAttribute("gdb",gdb);
-			request.setAttribute("tp",total);
-			// フォワード
-			request.getRequestDispatcher(FMHelper.GOODS_DELETE_PAGE).forward(request, response);
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
+		request.setAttribute("gid", goodsId);
+		// フォワード
+		request.getRequestDispatcher(FMHelper.BOARD_INPUT_PAGE).forward(request, response);
 	}
 
 	/**
@@ -59,17 +47,20 @@ public class GoodsDelete extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		int userId = (int) session.getAttribute("userId");
+
+//		jspの値を取得
 		int goodsId = Integer.parseInt(request.getParameter("goodsId"));
+		String comment = request.getParameter("comment");
 
 		try {
-			GoodsDao.GoodsDelete(userId, goodsId);
+//			Daoに値を送る
+			BoardDao.boardInput(goodsId, comment, userId);
 
 			response.sendRedirect("Complete");
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-
 	}
 
 }

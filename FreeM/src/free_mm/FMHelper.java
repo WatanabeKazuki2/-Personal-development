@@ -34,11 +34,11 @@ public class FMHelper {
 //	カートページ
 	static final String CART_PAGE="/WEB-INF/jsp/Cart.jsp";
 //	商談成立ページ
-	static final String BOAD_COMPLETE_PAGE="/WEB-INF/jsp/BoadComplete.jsp";
+	static final String BOARD_COMPLETE_PAGE="/WEB-INF/jsp/BoardComplete.jsp";
 //	ボード完了ページ
-	static final String BOAD_FINAL_PAGE="/WEB-INF/jsp/BoadFinal.jsp";
+	static final String BOARD_FINAL_PAGE="/WEB-INF/jsp/BoardFinal.jsp";
 //	ボード入力ページ
-	static final String BOAD_INPUT_PAGE="/WEB-INF/jsp/BoadInput.jsp";
+	static final String BOARD_INPUT_PAGE="/WEB-INF/jsp/BoardInput.jsp";
 //	新規登録ページ
 	static final String ENTRY_PAGE="/WEB-INF/jsp/Entry.jsp";
 //	エラーページ

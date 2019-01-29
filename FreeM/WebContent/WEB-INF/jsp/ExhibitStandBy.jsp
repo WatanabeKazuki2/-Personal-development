@@ -48,7 +48,7 @@
         </tr>
         </c:forEach>
     </table>
-    <a href="UserReference">戻る</a>
+		<INPUT type="button" value="戻る" onClick="history.go(-1)">
         </div>
 	</form>
 

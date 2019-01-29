@@ -36,7 +36,7 @@
 
 		<c:forEach var="BSBL" items="${bsbList}">
 
-		<input type="hidden" name="goodsId" goodsId="${BSBL.id}">
+		<input type="hidden" name="goodsId" value="${BSBL.id}">
 
         <tr>
         <td> <img src="img/${BSBL.fileName}" alt="" width="110" height="150"></td>
@@ -47,14 +47,14 @@
         <td>${BSBL.price}</td>
         <td>
             <a href="GoodsReference.html"><button type="button">詳細</button></a>
-            <a href="GoodsChat.html"><button type="button">商談へ</button></a>
+            <a href="GoodsBoad?goodsId=${BSBL.id}"><button type="button">商談へ</button></a>
         </td>
         </tr>
 
 		</c:forEach>
 
     </table>
-    <a href="UserReference.html">戻る</a>
+		<INPUT type="button" value="戻る" onClick="history.go(-1)">
         </div>
 
 	</form>

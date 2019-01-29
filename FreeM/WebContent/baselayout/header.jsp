@@ -37,7 +37,7 @@
 	            <a class="nav-link" href="Exhibit">商品登録</a>
 	          </li>
 			          <li class="nav-item">
-			            <a class="nav-link" href="ExhibitList">出品待機一覧</a>
+			            <a class="nav-link" href="ExhibitStandBy">出品待機一覧</a>
 			          </li>
 			          <li class="nav-item">
 			            <a class="nav-link" href="BuyStandBy">購入待機一覧</a>

@@ -2,28 +2,30 @@ package free_mm;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import beans.BoardDateBeans;
 import beans.GoodsDateBeans;
+import dao.BoardDao;
 import dao.GoodsDao;
 
 /**
- * Servlet implementation class GoodsDelete
+ * Servlet implementation class GoodsBoad
  */
-@WebServlet("/GoodsDelete")
-public class GoodsDelete extends HttpServlet {
+@WebServlet("/GoodsBoad")
+public class GoodsBoad extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GoodsDelete() {
+    public GoodsBoad() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,18 +35,26 @@ public class GoodsDelete extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+//		jspから商品ID取得
 		int goodsId = Integer.parseInt(request.getParameter("goodsId"));
 
 		try {
+//			商品の情報呼び出し
 			GoodsDateBeans gdb = GoodsDao.GR(goodsId);
 
-//			合計金額算出
+//			商品の合計算出
 			int total = FMHelper.total(gdb.getPrice(), gdb.getDeliveryMethodPrice());
 
-			request.setAttribute("gdb",gdb);
-			request.setAttribute("tp",total);
+//			掲示板の情報呼び出し
+			ArrayList<BoardDateBeans> bdbList = BoardDao.boadIndicate(goodsId);
+
+//			jspに値をセット
+			request.setAttribute("gdb", gdb);
+			request.setAttribute("tp", total);
+			request.setAttribute("bdbList",bdbList);
+
 			// フォワード
-			request.getRequestDispatcher(FMHelper.GOODS_DELETE_PAGE).forward(request, response);
+			request.getRequestDispatcher(FMHelper.GOODS_BOAD_PAGE).forward(request, response);
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
@@ -55,21 +65,8 @@ public class GoodsDelete extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession();
-
-		int userId = (int) session.getAttribute("userId");
-		int goodsId = Integer.parseInt(request.getParameter("goodsId"));
-
-		try {
-			GoodsDao.GoodsDelete(userId, goodsId);
-
-			response.sendRedirect("Complete");
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
-
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }
