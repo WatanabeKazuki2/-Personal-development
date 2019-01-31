@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.BoardDateBeans;
 import beans.GoodsDateBeans;
@@ -18,14 +19,14 @@ import dao.GoodsDao;
 /**
  * Servlet implementation class GoodsBoad
  */
-@WebServlet("/GoodsBoad")
-public class GoodsBoad extends HttpServlet {
+@WebServlet("/GoodsBoard")
+public class GoodsBoard extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GoodsBoad() {
+    public GoodsBoard() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -54,7 +55,7 @@ public class GoodsBoad extends HttpServlet {
 			request.setAttribute("bdbList",bdbList);
 
 			// フォワード
-			request.getRequestDispatcher(FMHelper.GOODS_BOAD_PAGE).forward(request, response);
+			request.getRequestDispatcher(FMHelper.GOODS_BOARD_PAGE).forward(request, response);
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
@@ -65,8 +66,43 @@ public class GoodsBoad extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		HttpSession session = request.getSession();
+
+		int userId = (int)session.getAttribute("userId");
+
+		int goodsId = Integer.parseInt(request.getParameter("goodsId"));
+
+		try {
+//			商品情報を呼び出す
+			GoodsDateBeans gdb = GoodsDao.GR(goodsId);
+
+//			出品者か購入者をを判別してDaoの呼び出し
+			if(userId == gdb.getExibitUserId()) {
+//				出品者側の処理
+				GoodsDao.ExhibitUserStatus(userId, goodsId);
+
+			}else if(userId==gdb.getByuUserId()) {
+//				購入者側の処理
+				GoodsDao.BuyUserStatus(userId, goodsId);
+
+			}
+
+			GoodsDateBeans gdbc = GoodsDao.GR(goodsId);
+
+//			両ユーザーが成立ボタンが押されてた場合に働く処理
+			if(gdbc.getBuyUserStatus() ==1 && gdbc.getExhibitUserStatus() == 1) {
+				
+				GoodsDao.BuyComplete(goodsId);
+
+			}
+			
+//			完了画面にリダイレクト
+			response.sendRedirect("Complete");
+
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 	}
 
 }

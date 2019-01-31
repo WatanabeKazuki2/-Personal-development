@@ -52,7 +52,7 @@ public class FMHelper {
 //	出品待機ページ
 	static final String EXHIBIT_STAND_BY_PAGE="/WEB-INF/jsp/ExhibitStandBy.jsp";
 //	商談画面
-	static final String GOODS_BOAD_PAGE="/WEB-INF/jsp/GoodsBoad.jsp";
+	static final String GOODS_BOARD_PAGE="/WEB-INF/jsp/GoodsBoard.jsp";
 //	商品削除ページ
 	static final String GOODS_DELETE_PAGE="/WEB-INF/jsp/GoodsDelete.jsp";
 //	商品リストページ

@@ -183,7 +183,11 @@ public class GoodsDao {
 				gdb.setDetail(rs.getString("f_item.detail"));
 				gdb.setDeliveryMethodName(rs.getString("f_delivery_method.name"));
 				gdb.setDeliveryMethodPrice(rs.getInt("f_delivery_method.price"));
+				gdb.setExibitUserId(rs.getInt("f_item.exibit_user_id"));
 				gdb.setExibitUserName(rs.getString("user_info.user_name"));
+				gdb.setByuUserId(rs.getInt("f_item.buy_user_id"));
+				gdb.setBuyUserStatus(rs.getInt("f_item.buy_user_status"));
+				gdb.setExhibitUserStatus(rs.getInt("f_item.exibit_user_status"));
 				gdb.setUpdateDate(rs.getDate("f_item.update_date"));
 
 			}
@@ -300,6 +304,97 @@ public class GoodsDao {
 			}
 		}
 	}
+
+//	出品履歴用
+	public static ArrayList<GoodsDateBeans> ExhibitHistory(int userId) throws SQLException{
+//		DBに接続
+		Connection conn = DBManager.getConnection();
+
+		try {
+			PreparedStatement pStmt = conn.prepareStatement("SELECT f_item.*,\r\n" +
+					"category.name,\r\n" +
+					"f_delivery_method.name,\r\n" +
+					"user_info.user_name\r\n" +
+					"FROM f_item INNER JOIN category\r\n" +
+					"ON f_item.category_id = category.id\r\n" +
+					"INNER JOIN user_info\r\n" +
+					"ON f_item.exibit_user_id=user_info.user_id\r\n" +
+					"INNER JOIN f_delivery_method\r\n" +
+					"ON f_item.delivery_method_id=f_delivery_method.id\r\n" +
+					"WHERE\r\n" +
+					"f_item.status=3 AND f_item.exibit_user_id=?;");
+
+			pStmt.setInt(1,userId);
+
+			ResultSet rs = pStmt.executeQuery();
+
+			ArrayList<GoodsDateBeans> goodsList = new ArrayList<GoodsDateBeans>();
+
+			while(rs.next()) {
+				GoodsDateBeans gdb = new GoodsDateBeans();
+				gdb.setId(rs.getInt("f_item.id"));
+				gdb.setFileName(rs.getString("f_item.file_name"));
+				gdb.setName(rs.getString("f_item.name"));
+				gdb.setExibitUserName(rs.getString("user_info.user_name"));
+				gdb.setCategoryName(rs.getString("category.name"));
+				gdb.setDeliveryMethodName(rs.getString("f_delivery_method.name"));
+				gdb.setPrice(rs.getInt("f_item.price"));
+				goodsList.add(gdb);
+			}
+			return goodsList;
+
+		}finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+	}
+
+//	購入履歴用
+	public static ArrayList<GoodsDateBeans> BuyHistory(int userId) throws SQLException{
+//		DBに接続
+		Connection conn = DBManager.getConnection();
+
+		try {
+			PreparedStatement pStmt = conn.prepareStatement("SELECT f_item.*,\r\n" +
+					"category.name,\r\n" +
+					"f_delivery_method.name,\r\n" +
+					"user_info.user_name\r\n" +
+					"FROM f_item INNER JOIN category\r\n" +
+					"ON f_item.category_id = category.id\r\n" +
+					"INNER JOIN user_info\r\n" +
+					"ON f_item.exibit_user_id=user_info.user_id\r\n" +
+					"INNER JOIN f_delivery_method\r\n" +
+					"ON f_item.delivery_method_id=f_delivery_method.id\r\n" +
+					"WHERE\r\n" +
+					"f_item.status=3 AND f_item.buy_user_id=?;");
+
+			pStmt.setInt(1,userId);
+
+			ResultSet rs = pStmt.executeQuery();
+
+			ArrayList<GoodsDateBeans> goodsList = new ArrayList<GoodsDateBeans>();
+
+			while(rs.next()) {
+				GoodsDateBeans gdb = new GoodsDateBeans();
+				gdb.setId(rs.getInt("f_item.id"));
+				gdb.setFileName(rs.getString("f_item.file_name"));
+				gdb.setName(rs.getString("f_item.name"));
+				gdb.setExibitUserName(rs.getString("user_info.user_name"));
+				gdb.setCategoryName(rs.getString("category.name"));
+				gdb.setDeliveryMethodName(rs.getString("f_delivery_method.name"));
+				gdb.setPrice(rs.getInt("f_item.price"));
+				goodsList.add(gdb);
+			}
+			return goodsList;
+
+		}finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+	}
+
 
 //	出品物リスト
 	public static ArrayList<GoodsDateBeans> ExhibitList(int userId) throws SQLException{
@@ -464,4 +559,71 @@ public class GoodsDao {
 		}
 	}
 
+	public static void ExhibitUserStatus(int userId,int goodsId) throws SQLException {
+//		DBに接続
+		Connection conn = DBManager.getConnection();
+		try {
+//			UPDATE文にてexibit_user_statusを購入承認状態にする
+			PreparedStatement pStmt = conn.prepareStatement("UPDATE f_item SET "
+					+ "exibit_user_status=1 "
+					+ "WHERE "
+					+ "id=?;");
+
+			pStmt.setInt(1, goodsId);
+
+			pStmt.executeUpdate();
+
+			conn.close();
+
+		}finally {
+			if(conn != null) {
+				conn.close();
+			}
+		}
+	}
+
+	public static void BuyUserStatus(int userId,int goodsId) throws SQLException{
+		Connection conn = DBManager.getConnection();
+		try {
+//			UPDATE文にてbuy_user_statusを購入承認状態にする
+			PreparedStatement pStmt = conn.prepareStatement("UPDATE f_item SET "
+					+ "buy_user_status=1 "
+					+ "WHERE "
+					+ "id=?");
+
+			pStmt.setInt(1, goodsId);
+
+			pStmt.executeUpdate();
+
+			conn.close();
+		}finally {
+			if(conn!=null) {
+				conn.close();
+			}
+		}
+	}
+
+//	商品を購入済みの状態にする処理
+	public static void BuyComplete(int goodsId) throws SQLException {
+//		DB接続
+		Connection conn = DBManager.getConnection();
+		try {
+//			UPDATE文にてf_itemのstatusを３（購入済み）に変更
+			PreparedStatement pStmt = conn.prepareStatement("UPDATE f_item SET "
+					+ "status=3 "
+					+ "WHERE id=?");
+
+			pStmt.setInt(1, goodsId);
+
+			pStmt.executeUpdate();
+
+			conn.close();
+
+		}finally {
+			if(conn!=null) {
+				conn.close();
+			}
+		}
+
+	}
 }

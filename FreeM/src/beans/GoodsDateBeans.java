@@ -21,8 +21,22 @@ public class GoodsDateBeans {
 	private String deliveryMethodName;
 	private int deliveryMethodPrice;
 	private int totalPrice;
+	private int exhibitUserStatus;
+	private int buyUserStatus;
 
 
+	public int getExhibitUserStatus() {
+		return exhibitUserStatus;
+	}
+	public void setExhibitUserStatus(int exhibitUserStatus) {
+		this.exhibitUserStatus = exhibitUserStatus;
+	}
+	public int getBuyUserStatus() {
+		return buyUserStatus;
+	}
+	public void setBuyUserStatus(int buyUserStatus) {
+		this.buyUserStatus = buyUserStatus;
+	}
 	public int getTotalPrice() {
 		return totalPrice;
 	}

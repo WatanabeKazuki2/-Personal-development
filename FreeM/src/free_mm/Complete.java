@@ -28,10 +28,17 @@ public class Complete extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     	// フォワード
     	RequestDispatcher dispatcher = request.getRequestDispatcher(FMHelper.Complete_PAGE);
     	dispatcher.forward(request, response);
     }
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 
+	}
 }

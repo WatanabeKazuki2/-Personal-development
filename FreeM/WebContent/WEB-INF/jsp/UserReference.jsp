@@ -65,8 +65,8 @@
     	</table>
     	<c:if test="${userInfo.userId == userDate.userId}">
     	<p><a href="UserUpdate"><button type="button">更新画面へ</button></a></p>
-      </div>
     	</c:if>
+      </div>
     </div><!-- /.container -->
 
     <div class="text-center">
@@ -74,12 +74,12 @@
 	<c:if test="${userInfo.userId == userDate.userId}">
     	<p><a href="ExhibitStandBy?userId=${userInfo.userId}"><button type="button">出品待機一覧</button></a></p>
     </c:if>
-   	 <p><a href="ExhibitHistory.html"><button type="button">出品履歴一覧</button></a></p>
+   	 <p><a href="ExhibitHistory?userId=${userInfo.userId}"><button type="button">出品履歴一覧</button></a></p>
 	<c:if test="${userInfo.userId == userDate.userId}">
     	<p><a href="BuyStandBy?userId=${userInfo.userId}"><button type="button">購入待機一覧</button></a></p>
     </c:if>
     <c:if test="${userInfo.userId == userDate.userId}">
-    	<p><a href="BuyHistory.html"><button type="button">購入履歴一覧</button></a></p>
+    	<p><a href="BuyHistory?userId=${userInfo.userId}"><button type="button">購入履歴一覧</button></a></p>
     </c:if>
     </div>
 

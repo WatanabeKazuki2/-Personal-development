@@ -46,8 +46,8 @@
         <td>${BSBL.deliveryMethodName}</td>
         <td>${BSBL.price}</td>
         <td>
-            <a href="GoodsReference.html"><button type="button">詳細</button></a>
-            <a href="GoodsBoad?goodsId=${BSBL.id}"><button type="button">商談へ</button></a>
+            <a href="GoodsReference?goodsId=${BSBL.id}"><button type="button">詳細</button></a>
+            <a href="GoodsBoard?goodsId=${BSBL.id}"><button type="button">商談へ</button></a>
         </td>
         </tr>
 

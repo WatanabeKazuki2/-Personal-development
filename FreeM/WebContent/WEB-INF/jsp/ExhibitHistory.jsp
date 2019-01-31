@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE >
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -8,19 +8,19 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>出品物リスト画面</title>
+    <title>出品履歴リスト画面</title>
       <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css">
     <link href="https://getbootstrap.com/docs/4.0/examples/starter-template/starter-template.css" rel="stylesheet">
   </head>
 
   <body>
 
-    <jsp:include page="/baselayout/header.jsp" />
+	<jsp:include page="/baselayout/header.jsp" />
 
-	<form action="ExhibitList" method="post">
+	<form action="ExhibitHistory" method="post">
 
     <div class="text-center">
-    <h1>出品物待機</h1>
+    <h1>出品履歴一覧</h1>
     </div>
         <div class="mx-auto" >
     <table class="table table-bordered">
@@ -33,25 +33,26 @@
             <th></th>
         </tr>
 
-        <c:forEach var="EL" items="${esb}">
-        <input type="hidden" name="goodsId" value="${EL.id}">
+        <c:forEach var="gh" items="${ghList}">
+
         <tr>
-        <td> <img src="img/${EL.fileName}" alt="" width="110" height="150"></td>
-        <td>${EL.name}</td>
-        <td>${EL.categoryName}</td>
-        <td>${EL.deliveryMethodName}</td>
-        <td>${EL.price}</td>
+        <td><img src="img/${gh.fileName}" alt="" width="110" height="150"></td>
+        <td>${gh.name}</td>
+        <td>${gh.categoryName}</td>
+        <td>${gh.deliveryMethodName}</td>
+        <td>${gh.price}円</td>
         <td>
-            <a href="GoodsReference?goodsId=${EL.id}"><button type="button">詳細</button></a>
-            <a href="GoodsBoard?goodsId=${EL.id}"><button type="button">商談へ</button></a>
+            <a href="GoodsReference"><button type="button">詳細</button></a>
         </td>
         </tr>
-        </c:forEach>
-    </table>
-		<INPUT type="button" value="戻る" onClick="history.go(-1)">
-        </div>
-	</form>
 
+        </c:forEach>
+
+    </table>
+    <a href="UserReference">戻る</a>
+        </div>
+
+	</form>
 
 
     <!-- Bootstrap core JavaScript

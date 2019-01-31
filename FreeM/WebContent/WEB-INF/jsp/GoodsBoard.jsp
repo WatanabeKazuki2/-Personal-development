@@ -17,9 +17,9 @@
 
 	<jsp:include page="/baselayout/header.jsp" />
 
+    <form action="GoodsBoard" method="post">
     <div class="text-center">
 
-    <form action="GoodsBoad" method="post">
 
     <h1>商談掲示板</h1>
     </div>
@@ -42,7 +42,7 @@
         </tr>
     </table>
     <div class="text-center">
-    <a href="ChatFinal.html"><button type="button">成立</button></a>
+    <button type="submit">成立</button>
     </div>
     </div>
 
