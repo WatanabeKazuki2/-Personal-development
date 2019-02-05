@@ -21,37 +21,40 @@ import dao.GoodsDao;
 public class BuyStandBy extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public BuyStandBy() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public BuyStandBy() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		if(session.getAttribute("userId")==null) {
+//			エラーページへ
+			response.sendRedirect("Error");
+		}else {
+			int userId = (int)session.getAttribute("userId");
 
-		int userId = (int)session.getAttribute("userId");
-
-		try {
+			try {
 //			userIdから出品リストを取得
-			ArrayList<GoodsDateBeans> bsbList = GoodsDao.BuyStandBy(userId);
+				ArrayList<GoodsDateBeans> bsbList = GoodsDao.BuyStandBy(userId);
 
 //		jspに値を引き渡す
-			request.setAttribute("bsbList",bsbList);
+				request.setAttribute("bsbList",bsbList);
 
-			// フォワード
-			request.getRequestDispatcher(FMHelper.BUY_STAND_BY_PAGE).forward(request, response);
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
+				// フォワード
+				request.getRequestDispatcher(FMHelper.BUY_STAND_BY_PAGE).forward(request, response);
+			} catch (SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
 		}
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

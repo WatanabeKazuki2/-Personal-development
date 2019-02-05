@@ -21,37 +21,41 @@ import dao.GoodsDao;
 public class ExhibitList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ExhibitList() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ExhibitList() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		if(session.getAttribute("userId")==null) {
+//			エラーページへ
+			response.sendRedirect("Error");
+		}else {
 
-		int userId = (int)session.getAttribute("userId");
+			int userId = (int)session.getAttribute("userId");
 
-		try {
+			try {
 //			userIdから出品リストを取得
-			ArrayList<GoodsDateBeans> EL = GoodsDao.ExhibitList(userId);
+				ArrayList<GoodsDateBeans> EL = GoodsDao.ExhibitList(userId);
 
 //		jspに値を引き渡す
-			request.setAttribute("EL",EL);
+				request.setAttribute("EL",EL);
 
-			// フォワード
-			request.getRequestDispatcher(FMHelper.EXHIBIT_LIST_PAGE).forward(request, response);
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
+				// フォワード
+				request.getRequestDispatcher(FMHelper.EXHIBIT_LIST_PAGE).forward(request, response);
+			} catch (SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
 		}
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

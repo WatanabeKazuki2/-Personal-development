@@ -228,7 +228,14 @@ public class UserDao {
 	public static List<UserDateBeans> UserAll(){
 		Connection conn = DBManager.getConnection();
 		List<UserDateBeans> userList = new ArrayList<UserDateBeans>();
-		String sql = "SELECT * FROM user_info";
+		String sql = "SELECT user_info.*,\r\n" +
+				"COUNT(f_item.exibit_user_id)\r\n" +
+				" FROM user_info\r\n" +
+				" LEFT OUTER JOIN f_item\r\n" +
+				" ON user_info.user_id = f_item.exibit_user_id\r\n" +
+				" AND f_item.status=1\r\n" +
+				" GROUP BY \r\n" +
+				" user_info.user_id";
 		try {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			ResultSet rs = pStmt.executeQuery();
@@ -237,6 +244,7 @@ public class UserDao {
 				 UserDateBeans udb = new UserDateBeans();
 				udb.setUserId(rs.getInt("user_id"));
 				udb.setName(rs.getString("user_name"));
+				udb.setCount(rs.getInt("COUNT(f_item.exibit_user_id)"));
 
 				userList.add(udb);
 			 }
@@ -270,14 +278,22 @@ public class UserDao {
 
             // SELECT文を準備
 
-            String sql = "SELECT * FROM user_info WHERE user_name LIKE ?";
+            String sql = "SELECT user_info.*,\r\n" +
+            		"COUNT(f_item.exibit_user_id)\r\n" +
+            		" FROM user_info\r\n" +
+            		" LEFT OUTER JOIN f_item\r\n" +
+            		" ON user_info.user_id = f_item.exibit_user_id\r\n" +
+            		" AND f_item.status=1\r\n"+
+            		 "WHERE user_name LIKE ? \r\n"+
+            		" GROUP BY \r\n" +
+            		" user_info.user_id";
 
             PreparedStatement pStmt = conn.prepareStatement(sql);
 
             if(!name.isEmpty()) {
-            	pStmt.setString(1, name + "%");
+            	pStmt.setString(1,"%" + name + "%");
             }else {
-            	pStmt.setString(1, "" + "%");
+            	pStmt.setString(1,"%" + "" + "%");
             }
 
 
@@ -287,6 +303,7 @@ public class UserDao {
 				 UserDateBeans udb = new UserDateBeans();
 				udb.setUserId(rs.getInt("user_id"));
 				udb.setName(rs.getString("user_name"));
+				udb.setCount(rs.getInt("COUNT(f_item.exibit_user_id)"));
 
 				userList.add(udb);
 			 }
@@ -309,4 +326,6 @@ public class UserDao {
 		}
 		return userList;
 	}
+
+
 }

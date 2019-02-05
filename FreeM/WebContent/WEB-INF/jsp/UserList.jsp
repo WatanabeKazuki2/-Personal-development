@@ -18,12 +18,12 @@
 
     <jsp:include page="/baselayout/header.jsp" />
 
+    		<form action="UserList" method="post">
     <div class="container">
 
       <div class="starter-template">
         <h1>ユーザー一覧</h1>
 
-    		<form action="UserList" method="post">
     		<div class="mx-auto" style="width: 200px;">
 				<div  class="form-inline my-2 my-lg-0">
 		            <div class = "navbar-brand">
@@ -42,20 +42,20 @@
     			<th></th>
     		</tr>
     			<c:forEach var="user" items="${userList}">
-    			<input type="hidden" name ="userId" userId="${user.userId}">
+    			<input type="hidden" name ="userId" value="${user.userId}">
 		    		<tr>
 		    			<td>${user.name}</td>
-		    			<td>3件</td>
+		    			<td>${user.count}件</td>
 		    			<td><a href="UserReference?userId=${user.userId}"><button type="button">詳細</button></a></td>
 		    		</tr>
     			</c:forEach>
-    		</form>
 
 
     	</table>
       </div>
 
     </div><!-- /.container -->
+    		</form>
 
 
     <!-- Bootstrap core JavaScript

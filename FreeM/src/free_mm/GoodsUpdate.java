@@ -28,44 +28,50 @@ import dao.GoodsDao;
 public class GoodsUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GoodsUpdate() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public GoodsUpdate() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		URLから商品IDのを取得
-		int goodsId = Integer.parseInt(request.getParameter("goodsId"));
+		HttpSession session = request.getSession();
+		if(session.getAttribute("userId")==null) {
+//			エラーページへ
+			response.sendRedirect("Error");
+		}else {
 
-		try {
+//		URLから商品IDのを取得
+			int goodsId = Integer.parseInt(request.getParameter("goodsId"));
+
+			try {
 //			商品情報取得
-			GoodsDateBeans gdb = GoodsDao.GR(goodsId);
+				GoodsDateBeans gdb = GoodsDao.GR(goodsId);
 //			カテゴリー一覧を取得
-			List<CategoryDateBeans> categoryList = CategoryDao.CategoryList();
+				List<CategoryDateBeans> categoryList = CategoryDao.CategoryList();
 //			運送情報一覧を取得
-			List<DeliveryMethodDateBeans> dmdList = DeliveryMethodDao.DMD();
+				List<DeliveryMethodDateBeans> dmdList = DeliveryMethodDao.DMD();
 
 //			jspに各情報をセット
-			request.setAttribute("gdb", gdb);
-			request.setAttribute("categoryList", categoryList);
-			request.setAttribute("dmdList",dmdList);
+				request.setAttribute("gdb", gdb);
+				request.setAttribute("categoryList", categoryList);
+				request.setAttribute("dmdList",dmdList);
 
-			// フォワード
-			request.getRequestDispatcher(FMHelper.GOODS_UPDATE_PAGE).forward(request, response);
+				// フォワード
+				request.getRequestDispatcher(FMHelper.GOODS_UPDATE_PAGE).forward(request, response);
 
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+
 		}
-
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

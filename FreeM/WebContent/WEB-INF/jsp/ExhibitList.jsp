@@ -43,11 +43,24 @@
         <td>${el.categoryName}</td>
         <td>${el.deliveryMethodName}</td>
         <td>${el.price}</td>
-        <td>
-            <a href="GoodsReference?goodsId=${el.id}"><button type="button">詳細</button></a>
-            <a href="GoodsUpdate?goodsId=${el.id}"><button type="button">更新</button></a>
-            <a href="GoodsDelete?goodsId=${el.id}"><button type="button">削除</button></a>
-        </td>
+
+		<c:choose>
+
+			<c:when test="${userInfo.userId}==${el.exibitUserId}">
+		        <td>
+		            <a href="GoodsReference?goodsId=${el.id}"><button type="button">詳細</button></a>
+		            <a href="GoodsUpdate?goodsId=${el.id}"><button type="button">更新</button></a>
+		            <a href="GoodsDelete?goodsId=${el.id}"><button type="button">削除</button></a>
+		        </td>
+			</c:when>
+
+			<c:otherwise>
+				<td>
+					<a href="GoodsReference?goodsId=${el.id}"><button type="button">詳細</button></a>
+				</td>
+			</c:otherwise>
+		</c:choose>
+
         </tr>
         </c:forEach>
     </table>

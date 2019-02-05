@@ -20,43 +20,47 @@ import dao.GoodsDao;
 public class Question extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Question() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public Question() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		if(session.getAttribute("userId")==null) {
+//			エラーページへ
+			response.sendRedirect("Error");
+		}else {
 
-		//		URLからIDを取得
-		int goodsId = Integer.parseInt(request.getParameter("goodsId"));
-		GoodsDateBeans gdb = new GoodsDateBeans();
-		try {
+			//		URLからIDを取得
+			int goodsId = Integer.parseInt(request.getParameter("goodsId"));
+			GoodsDateBeans gdb = new GoodsDateBeans();
+			try {
 //
-			gdb = GoodsDao.GR(goodsId);
+				gdb = GoodsDao.GR(goodsId);
 
-			int price = gdb.getPrice();
-			int dmp = gdb.getDeliveryMethodPrice();
-			int totalPrice =
-					FMHelper.total(price, dmp);
+				int price = gdb.getPrice();
+				int dmp = gdb.getDeliveryMethodPrice();
+				int totalPrice =
+						FMHelper.total(price, dmp);
 
-			session.setAttribute("goodsId", goodsId);
-			request.setAttribute("gr",gdb);
-			request.setAttribute("tp",totalPrice);
-			// フォワード
-			request.getRequestDispatcher(FMHelper.Question_Page).forward(request, response);
+				session.setAttribute("goodsId", goodsId);
+				request.setAttribute("gr",gdb);
+				request.setAttribute("tp",totalPrice);
+				// フォワード
+				request.getRequestDispatcher(FMHelper.Question_Page).forward(request, response);
 
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
 		}
-
 	}
 
 	/**

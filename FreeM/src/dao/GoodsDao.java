@@ -589,7 +589,7 @@ public class GoodsDao {
 			PreparedStatement pStmt = conn.prepareStatement("UPDATE f_item SET "
 					+ "buy_user_status=1 "
 					+ "WHERE "
-					+ "id=?");
+					+ "id=? ");
 
 			pStmt.setInt(1, goodsId);
 

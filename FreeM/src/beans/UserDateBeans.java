@@ -11,12 +11,19 @@ public class UserDateBeans implements Serializable{
 	private String streetAddress;
 	private Date createDate;
 	private Date updateDate;
+	private int count;
 
-//	ログイン用のコンストラクタ
 
+//	setter getter
 
 	public int getUserId() {
 		return userId;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;

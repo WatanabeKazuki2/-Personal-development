@@ -21,37 +21,44 @@ import dao.GoodsDao;
 public class ExhibitHistory extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ExhibitHistory() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ExhibitHistory() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-//		ユーザーIDの呼び出し
-		int userId = (int)session.getAttribute("userId");
+		if(session.getAttribute("userId")==null) {
+//			エラーページへ
+			response.sendRedirect("Error");
+		}else {
+			//		ユーザーIDの呼び出し
+			int userId = (int)session.getAttribute("userId");
 
-		try {
+			try {
 //			リストでユーザーIDをもとに出品履歴を呼び出し
-			ArrayList<GoodsDateBeans> ehList = GoodsDao.ExhibitHistory(userId);
+
+
+				ArrayList<GoodsDateBeans> ehList = GoodsDao.ExhibitHistory(userId);
 
 //			リクエストスコープに値をセット
-			request.setAttribute("ehList", ehList);
+				request.setAttribute("ehList", ehList);
 
-			// フォワード
-			request.getRequestDispatcher(FMHelper.EXHIBIT_HISTORY_PAGE).forward(request, response);
+				// フォワード
+				request.getRequestDispatcher(FMHelper.EXHIBIT_HISTORY_PAGE).forward(request, response);
 
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+
 		}
-
 
 	}
 

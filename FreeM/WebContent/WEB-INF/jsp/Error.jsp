@@ -8,51 +8,29 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>出品履歴リスト画面</title>
+    <title>エラー画面</title>
       <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css">
     <link href="https://getbootstrap.com/docs/4.0/examples/starter-template/starter-template.css" rel="stylesheet">
   </head>
 
   <body>
 
-	<jsp:include page="/baselayout/header.jsp" />
+    <jsp:include page="/baselayout/header.jsp" />
 
-	<form action="ExhibitHistory" method="post">
+    <div class="container">
 
-    <div class="text-center">
-    <h1>出品履歴一覧</h1>
+      <div class="starter-template">
+          <div class="alert alert-danger" role="alert">
+                <h1>エラーが出ました！</h1>
+            </div>
+      </div>
+
+    <div class="mx-auto">
+    	<a href="Index"><button class="btn btn-secondary" type="button">ホームヘ</button></a>
     </div>
-        <div class="mx-auto" >
-    <table class="table table-bordered">
-        <tr>
-        	<th></th>
-            <th>商品名</th>
-            <th>カテゴリー</th>
-            <th>配送方法</th>
-            <th>小計</th>
-            <th></th>
-        </tr>
+      	</div>
+    </div><!-- /.container -->
 
-        <c:forEach var="eh" items="${ehList}">
-
-        <tr>
-        <td><img src="img/${eh.fileName}" alt="" width="110" height="150"></td>
-        <td>${eh.name}</td>
-        <td>${eh.categoryName}</td>
-        <td>${eh.deliveryMethodName}</td>
-        <td>${eh.price}円</td>
-        <td>
-            <a href="GoodsReference"><button type="button">詳細</button></a>
-        </td>
-        </tr>
-
-        </c:forEach>
-
-    </table>
-    <a href="UserReference">戻る</a>
-        </div>
-
-	</form>
 
 
     <!-- Bootstrap core JavaScript

@@ -21,38 +21,42 @@ import dao.GoodsDao;
 public class ExhibitStandBy extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ExhibitStandBy() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ExhibitStandBy() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		if(session.getAttribute("userId")==null) {
+//			エラーページへ
+			response.sendRedirect("Error");
+		}else {
 
-		int userId = (int)session.getAttribute("userId");
+			int userId = (int)session.getAttribute("userId");
 
-		try {
+			try {
 //			userIdから出品リストを取得
-			ArrayList<GoodsDateBeans> ESB = GoodsDao.ExhibitStandBy(userId);
+				ArrayList<GoodsDateBeans> ESB = GoodsDao.ExhibitStandBy(userId);
 
 //		jspに値を引き渡す
-			request.setAttribute("esb",ESB);
+				request.setAttribute("esb",ESB);
 
-			// フォワード
-			request.getRequestDispatcher(FMHelper.EXHIBIT_STAND_BY_PAGE).forward(request, response);
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
+				// フォワード
+				request.getRequestDispatcher(FMHelper.EXHIBIT_STAND_BY_PAGE).forward(request, response);
+			} catch (SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+
 		}
-
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

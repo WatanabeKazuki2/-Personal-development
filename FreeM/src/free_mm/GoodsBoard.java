@@ -23,45 +23,50 @@ import dao.GoodsDao;
 public class GoodsBoard extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GoodsBoard() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public GoodsBoard() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		if(session.getAttribute("userId")==null) {
+//			エラーページへ
+			response.sendRedirect("Error");
+		}else {
 
 //		jspから商品ID取得
-		int goodsId = Integer.parseInt(request.getParameter("goodsId"));
+			int goodsId = Integer.parseInt(request.getParameter("goodsId"));
 
-		try {
+			try {
 //			商品の情報呼び出し
-			GoodsDateBeans gdb = GoodsDao.GR(goodsId);
+				GoodsDateBeans gdb = GoodsDao.GR(goodsId);
 
 //			商品の合計算出
-			int total = FMHelper.total(gdb.getPrice(), gdb.getDeliveryMethodPrice());
+				int total = FMHelper.total(gdb.getPrice(), gdb.getDeliveryMethodPrice());
 
 //			掲示板の情報呼び出し
-			ArrayList<BoardDateBeans> bdbList = BoardDao.boadIndicate(goodsId);
+				ArrayList<BoardDateBeans> bdbList = BoardDao.boadIndicate(goodsId);
 
 //			jspに値をセット
-			request.setAttribute("gdb", gdb);
-			request.setAttribute("tp", total);
-			request.setAttribute("bdbList",bdbList);
+				request.setAttribute("gdb", gdb);
+				request.setAttribute("tp", total);
+				request.setAttribute("bdbList",bdbList);
 
-			// フォワード
-			request.getRequestDispatcher(FMHelper.GOODS_BOARD_PAGE).forward(request, response);
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
+				// フォワード
+				request.getRequestDispatcher(FMHelper.GOODS_BOARD_PAGE).forward(request, response);
+			} catch (SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
 		}
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -91,11 +96,11 @@ public class GoodsBoard extends HttpServlet {
 
 //			両ユーザーが成立ボタンが押されてた場合に働く処理
 			if(gdbc.getBuyUserStatus() ==1 && gdbc.getExhibitUserStatus() == 1) {
-				
+
 				GoodsDao.BuyComplete(goodsId);
 
 			}
-			
+
 //			完了画面にリダイレクト
 			response.sendRedirect("Complete");
 

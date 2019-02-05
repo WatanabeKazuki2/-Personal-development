@@ -31,12 +31,18 @@ public class BoardInput extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		if(session.getAttribute("userId")==null) {
+//			エラーページへ
+			response.sendRedirect("Error");
+		}else {
 
 		int goodsId = Integer.parseInt(request.getParameter("goodsId"));
 
 		request.setAttribute("gid", goodsId);
 		// フォワード
 		request.getRequestDispatcher(FMHelper.BOARD_INPUT_PAGE).forward(request, response);
+		}
 	}
 
 	/**

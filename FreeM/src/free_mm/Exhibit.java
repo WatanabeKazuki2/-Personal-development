@@ -39,25 +39,29 @@ public class Exhibit extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		try {
-			// カテゴリーリストを取得
-			List<CategoryDateBeans> categoryList = CategoryDao.CategoryList();
+		HttpSession session = request.getSession();
+		if(session.getAttribute("userId")==null) {
+//			エラーページへ
+			response.sendRedirect("Error");
+		}else {
+			try {
+				// カテゴリーリストを取得
+				List<CategoryDateBeans> categoryList = CategoryDao.CategoryList();
 //			運送リストを取得
-			List<DeliveryMethodDateBeans> dmList = DeliveryMethodDao.DMD();
-			// リクエストスコープにカテゴリー情報をセット
-			request.setAttribute("categoryList",categoryList);
-			// リクエストスコープに運送情報をセット
-			request.setAttribute("dmList", dmList);
+				List<DeliveryMethodDateBeans> dmList = DeliveryMethodDao.DMD();
+				// リクエストスコープにカテゴリー情報をセット
+				request.setAttribute("categoryList",categoryList);
+				// リクエストスコープに運送情報をセット
+				request.setAttribute("dmList", dmList);
 
-			// フォワード
-			request.getRequestDispatcher(FMHelper.EXHIBIT_PAGE).forward(request, response);
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
+				// フォワード
+				request.getRequestDispatcher(FMHelper.EXHIBIT_PAGE).forward(request, response);
+			} catch (SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
 		}
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

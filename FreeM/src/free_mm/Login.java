@@ -34,9 +34,17 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+				//		すでにログインセッションがあるならエラーページへ
+		if(session.getAttribute("userId")!=null) {
+
+//			エラーページへ
+			response.sendRedirect("Error");
+		}else {
 
 		// フォワード
 		request.getRequestDispatcher(FMHelper.LOGIN_PAGE).forward(request, response);
+		}
 	}
 
 	/**
