@@ -23,7 +23,7 @@
 
       <div class="starter-template">
         <h1>この商品の購入を申請しますか？</h1>
-		<input type="hidden" name="goodsId" goodsId="${gr.id}">
+		<input type="hidden" name="goodsId" value="${gr.id}">
 	<table class="table table-bordered">
 		<tr>
 			<th>商品名</th>
@@ -44,7 +44,7 @@
 	</table>
 
 	        <button type="submit">確定する</button>
-	        <a href="Index"><button type="button">キャンセル</button></a>
+			<INPUT type="button" value="キャンセル" onClick="history.go(-1)">
       </div>
 
     </form>

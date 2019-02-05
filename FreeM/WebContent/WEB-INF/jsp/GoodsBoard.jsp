@@ -50,7 +50,7 @@
         <h3>掲示板</h3>
         <a href="BoardInput?goodsId=${gdb.id}"><button type="button">掲示板に記入</button></a>
     </div>
-    <table>
+    <table class="table table-bordered">
     	<c:forEach var="bdb" items="${bdbList}">
 	        <tr>
 	            <td>${bdb.userName}</td>

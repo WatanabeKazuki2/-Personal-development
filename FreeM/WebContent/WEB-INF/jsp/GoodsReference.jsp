@@ -19,7 +19,7 @@
     <div class="container">
 
 	<form action="GoodsReference" method="post">
-	<input type="hidden" name="goodsId" goodsId="${goods.id}">
+	<input type="hidden" name="goodsId" value="${goods.id}">
 
       <div class="starter-template">
         <h1>商品詳細</h1>
@@ -30,7 +30,11 @@
 	<p>${goods.price}円</p>
 	<p>出品者 ${goods.exibitUserName}</p>
 	<p>${goods.updateDate} 更新</p>
-	<a href="Question?goodsId=${goods.id}">購入申請</a>
+
+	<c:if test="${userInfo.userId != goods.exibitUserId}">
+		<a href="Question?goodsId=${goods.id}"><button type="button">購入申請</button></a>
+	</c:if>
+
       </div>
 	</form>
 

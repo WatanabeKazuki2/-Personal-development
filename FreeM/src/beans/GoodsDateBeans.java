@@ -1,5 +1,6 @@
 package beans;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class GoodsDateBeans {
@@ -138,6 +139,15 @@ public class GoodsDateBeans {
 	}
 	public void setDeliveryMethodId(int deliveryMethodId) {
 		this.deliveryMethodId = deliveryMethodId;
+	}
+
+	public String getFormatCreateDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日HH時mm分");
+		return sdf.format(createDate);
+	}
+	public String getFormatUpdateDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日HH時mm分");
+		return sdf.format(updateDate);
 	}
 
 

@@ -1,5 +1,6 @@
 package beans;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BoardDateBeans {
@@ -47,6 +48,10 @@ public class BoardDateBeans {
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+	public String getFormatDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日HH時mm分");
+		return sdf.format(createDate);
 	}
 
 }
