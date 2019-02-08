@@ -40,7 +40,6 @@ public class BuyHistory extends HttpServlet {
 			response.sendRedirect("Error");
 		}else {
 			int userId = (int)session.getAttribute("userId");
-
 			try {
 //			リストでユーザーIDをもとに出品履歴を呼び出し
 

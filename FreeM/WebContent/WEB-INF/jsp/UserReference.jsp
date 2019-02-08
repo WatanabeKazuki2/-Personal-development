@@ -24,7 +24,7 @@
       </div>
 
       <div class="text-center">
-      <input type="hidden" name="userId" value="${userInfo.userId}">
+      <input type="hidden" name="userId" value="${userinfo.userId}">
           <table class="table table-bordered">
     		<c:if test="${userInfo.userId == userDate.userId}">
     		<tr>
@@ -70,16 +70,16 @@
     </div><!-- /.container -->
 
     <div class="text-center">
-    <p><a href="ExhibitList?userId=${userInfo.userId}"><button type="button">出品物一覧</button></a></p>
+    <p><a href="ExhibitList?userId=${userDate.userId}"><button type="button">出品物一覧</button></a></p>
 	<c:if test="${userInfo.userId == userDate.userId}">
-    	<p><a href="ExhibitStandBy?userId=${userInfo.userId}"><button type="button">出品待機一覧</button></a></p>
+    	<p><a href="ExhibitStandBy?userId=${userDate.userId}"><button type="button">出品待機一覧</button></a></p>
     </c:if>
-   	 <p><a href="ExhibitHistory?userId=${userInfo.userId}"><button type="button">出品履歴一覧</button></a></p>
+   	 <p><a href="ExhibitHistory?userId=${userDate.userId}"><button type="button">出品履歴一覧</button></a></p>
 	<c:if test="${userInfo.userId == userDate.userId}">
-    	<p><a href="BuyStandBy?userId=${userInfo.userId}"><button type="button">購入待機一覧</button></a></p>
+    	<p><a href="BuyStandBy?userId=${userDate.userId}"><button type="button">購入待機一覧</button></a></p>
     </c:if>
     <c:if test="${userInfo.userId == userDate.userId}">
-    	<p><a href="BuyHistory?userId=${userInfo.userId}"><button type="button">購入履歴一覧</button></a></p>
+    	<p><a href="BuyHistory?userId=${userDate.userId}"><button type="button">購入履歴一覧</button></a></p>
     </c:if>
     </div>
 

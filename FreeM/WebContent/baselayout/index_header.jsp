@@ -48,9 +48,10 @@
 	        </ul>
 	</div>
         <form action="Index" method="post" class="form-inline my-2 my-lg-0" >
-        <select class="selectpicker">
+        <select class="selectpicker" name="categoryId">
+        		  <option value=0>すべて</option>
         <c:forEach var="category" items="${categoryList}">
-	              <option value="${categiry.id}">${category.name}</option>
+	              <option value="${category.id}">${category.name}</option>
        </c:forEach>
               </select>
             <div class = "navbar-brand">

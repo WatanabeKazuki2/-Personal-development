@@ -42,7 +42,7 @@
         <td>${eh.deliveryMethodName}</td>
         <td>${eh.price}円</td>
         <td>
-            <a href="GoodsReference"><button type="button">詳細</button></a>
+            <a href="GoodsReference?goodsId=${eh.id}"><button type="button">詳細</button></a>
         </td>
         </tr>
 

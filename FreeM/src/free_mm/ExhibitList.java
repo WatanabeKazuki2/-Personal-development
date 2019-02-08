@@ -39,11 +39,14 @@ public class ExhibitList extends HttpServlet {
 			response.sendRedirect("Error");
 		}else {
 
-			int userId = (int)session.getAttribute("userId");
+			int exhibitUserId = Integer.parseInt(request.getParameter("userId"));
+
+
+
 
 			try {
 //			userIdから出品リストを取得
-				ArrayList<GoodsDateBeans> EL = GoodsDao.ExhibitList(userId);
+				ArrayList<GoodsDateBeans> EL = GoodsDao.ExhibitList(exhibitUserId);
 
 //		jspに値を引き渡す
 				request.setAttribute("EL",EL);

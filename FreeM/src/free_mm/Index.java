@@ -69,9 +69,10 @@ public class Index extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		String seachWord = request.getParameter("seach");
+		int categoryId = Integer.parseInt(request.getParameter("categoryId"));
 
 		session.setAttribute("seachWord", seachWord);
-
+		session.setAttribute("categoryId", categoryId);
 		// ユーザ一覧のサーブレットにリダイレクト
 		response.sendRedirect("GoodsList");
 

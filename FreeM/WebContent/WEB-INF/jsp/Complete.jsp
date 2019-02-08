@@ -25,6 +25,7 @@
             </div>
     <div class="mx-auto">
     	<a href="Index"><button class="btn btn-secondary" type="button">ホームヘ</button></a>
+    	<INPUT type="button" value="戻る" onClick="history.go(-2)">
     </div>
       	</div>
     </div><!-- /.container -->

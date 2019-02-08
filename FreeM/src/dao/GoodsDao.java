@@ -10,7 +10,13 @@ import base.DBManager;
 import beans.GoodsDateBeans;
 
 public class GoodsDao {
-//	ホーム用
+
+	/**
+	 * ホーム画面で表示する商品一覧を返す
+	 * @param limit
+	 * @return	商品一覧
+	 * @throws SQLException
+	 */
 	public static ArrayList<GoodsDateBeans> IndexGoods(int limit) throws SQLException{
 		Connection conn = DBManager.getConnection();
 		try {
@@ -48,12 +54,20 @@ public class GoodsDao {
 
 	}
 
-//	商品検索用
-	public static ArrayList<GoodsDateBeans> seachGoods(String name) throws SQLException{
+
+	/**f_itemの商品をDBで検索して結果を返す
+	 * @param categoryId,name
+	 * @return 検索商品一覧
+	 * @throws SQLException
+	 */
+	public static ArrayList<GoodsDateBeans> seachGoods(int categoryId,String name) throws SQLException{
 //		DBに接続
 		Connection conn = DBManager.getConnection();
 
 		try {
+			//特定のカテゴリーが選択されていたら行われる処理
+			if(categoryId!=0) {
+
 			PreparedStatement pStmt = conn.prepareStatement("SELECT f_item.*,\r\n" +
 					"category.name,\r\n" +
 					"f_delivery_method.name,\r\n" +
@@ -67,13 +81,17 @@ public class GoodsDao {
 					"WHERE\r\n" +
 					"f_item.status=1\r\n" +
 					"AND\r\n" +
-					"f_item.name LIKE ?;");
+					"f_item.name LIKE ?\r\n " +
+					"AND\r\n" +
+					"f_item.category_id=?;");
+
 			if(!name.isEmpty()) {
 				pStmt.setString(1,"%" + name + "%");
 			}else {
 				pStmt.setString(1,"%" + "" + "%");
 			}
 
+			pStmt.setInt(2, categoryId);
 			ResultSet rs = pStmt.executeQuery();
 
 			ArrayList<GoodsDateBeans> goodsList = new ArrayList<GoodsDateBeans>();
@@ -91,6 +109,46 @@ public class GoodsDao {
 			}
 			return goodsList;
 
+			}else {
+				//カテゴリーで「すべて」が選択されたら行われる処理
+				PreparedStatement pStmt = conn.prepareStatement("SELECT f_item.*,\r\n" +
+						"category.name,\r\n" +
+						"f_delivery_method.name,\r\n" +
+						"user_info.user_name\r\n" +
+						"FROM f_item INNER JOIN category\r\n" +
+						"ON f_item.category_id = category.id\r\n" +
+						"INNER JOIN user_info\r\n" +
+						"ON f_item.exibit_user_id=user_info.user_id\r\n" +
+						"INNER JOIN f_delivery_method\r\n" +
+						"ON f_item.delivery_method_id=f_delivery_method.id\r\n" +
+						"WHERE\r\n" +
+						"f_item.status=1\r\n" +
+						"AND\r\n" +
+						"f_item.name LIKE ?;");
+				if(!name.isEmpty()) {
+					pStmt.setString(1,"%" + name + "%");
+				}else {
+					pStmt.setString(1,"%" + "" + "%");
+				}
+
+				ResultSet rs = pStmt.executeQuery();
+
+				ArrayList<GoodsDateBeans> goodsList = new ArrayList<GoodsDateBeans>();
+
+				while(rs.next()) {
+					GoodsDateBeans gdb = new GoodsDateBeans();
+					gdb.setId(rs.getInt("f_item.id"));
+					gdb.setFileName(rs.getString("f_item.file_name"));
+					gdb.setName(rs.getString("f_item.name"));
+					gdb.setExibitUserName(rs.getString("user_info.user_name"));
+					gdb.setCategoryName(rs.getString("category.name"));
+					gdb.setDeliveryMethodName(rs.getString("f_delivery_method.name"));
+					gdb.setPrice(rs.getInt("f_item.price"));
+					goodsList.add(gdb);
+				}
+				return goodsList;
+
+			}
 		}finally {
 			if (conn != null) {
 				conn.close();

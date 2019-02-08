@@ -39,13 +39,12 @@ public class ExhibitHistory extends HttpServlet {
 			response.sendRedirect("Error");
 		}else {
 			//		ユーザーIDの呼び出し
-			int userId = (int)session.getAttribute("userId");
-
+			int exhibitUserId = Integer.parseInt(request.getParameter("userId"));
 			try {
 //			リストでユーザーIDをもとに出品履歴を呼び出し
 
 
-				ArrayList<GoodsDateBeans> ehList = GoodsDao.ExhibitHistory(userId);
+				ArrayList<GoodsDateBeans> ehList = GoodsDao.ExhibitHistory(exhibitUserId);
 
 //			リクエストスコープに値をセット
 				request.setAttribute("ehList", ehList);

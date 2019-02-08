@@ -39,11 +39,12 @@ public class GoodsList extends HttpServlet {
 		HttpSession session = request.getSession();
 //		検索ワードをセッションから取得
 		String seach=(String) session.getAttribute("seachWord");
+		int categoryId =(int) session.getAttribute("categoryId");
 		try {
 			// カテゴリーを表示
 			List<CategoryDateBeans> categoryList = CategoryDao.CategoryList();
 
-			ArrayList<GoodsDateBeans> gList = GoodsDao.seachGoods(seach);
+			ArrayList<GoodsDateBeans> gList = GoodsDao.seachGoods(categoryId,seach);
 
 			//		jspにサーチワードをセット
 			request.setAttribute("gList", gList);
@@ -56,6 +57,8 @@ public class GoodsList extends HttpServlet {
 			if(searchWord != null) {
 				session.removeAttribute("searchWord");
 			}
+
+			session.removeAttribute("categoryId");
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
@@ -71,10 +74,10 @@ public class GoodsList extends HttpServlet {
 
 
 		String seach = request.getParameter("seach");
-
+		int categoryId = Integer.parseInt(request.getParameter("categoryId"));
 		try {
 
-			ArrayList<GoodsDateBeans> gList = GoodsDao.seachGoods(seach);
+			ArrayList<GoodsDateBeans> gList = GoodsDao.seachGoods(categoryId,seach);
 
 			//		jspにサーチワードをセット
 			request.setAttribute("gList", gList);
@@ -85,7 +88,6 @@ public class GoodsList extends HttpServlet {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-
 	}
 
 }
