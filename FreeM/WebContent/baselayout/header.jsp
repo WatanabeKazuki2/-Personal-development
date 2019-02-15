@@ -26,10 +26,10 @@
 			          </li>
 	          	</c:otherwise>
 	          </c:choose>
+				<c:if test="${userInfo.userId>=1}">
 	          <li class="nav-item">
 	            <a class="nav-link" href="UserList">ユーザー一覧</a>
 	          </li>
-				<c:if test="${userInfo.userId>=1}">
 	          <li class="nav-item active">
 	            <a class="nav-link" href="UserReference">ユーザー情報<span class="sr-only">(current)</span></a>
 	          </li>
