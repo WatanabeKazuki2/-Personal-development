@@ -12,6 +12,11 @@ import beans.DeliveryMethodDateBeans;
 
 public class DeliveryMethodDao {
 //	運送データ一覧
+
+	/**出品時に設定する運送方法のデータを出力するもの
+	 * @return DBに保存されている運送方法を返す
+	 * @throws SQLException
+	 */
 	public static List<DeliveryMethodDateBeans> DMD() throws SQLException{
 //		DBに接続
 		Connection conn = DBManager.getConnection();

@@ -9,9 +9,17 @@ import java.util.ArrayList;
 import base.DBManager;
 import beans.BoardDateBeans;
 
+/**
+ * @author LIKEIT_STUDENT
+ *
+ */
 public class BoardDao {
 
-//	掲示板コメント表示用
+	/**掲示板コメント表示用
+	 * @param goodsId
+	 * @return 掲示板コメント
+	 * @throws SQLException
+	 */
 	public static ArrayList<BoardDateBeans> boadIndicate(int goodsId) throws SQLException {
 //		DBに接続
 		Connection conn = DBManager.getConnection();
@@ -60,6 +68,13 @@ public class BoardDao {
 	}
 
 
+
+	/**コメントをDBに保存するもの
+	 * @param goodsId
+	 * @param comment
+	 * @param userId
+	 * @throws SQLException
+	 */
 	public static void boardInput(int goodsId,String comment,int userId) throws SQLException {
 		Connection conn = DBManager.getConnection();
 

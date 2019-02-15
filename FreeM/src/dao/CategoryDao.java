@@ -14,7 +14,10 @@ public class CategoryDao {
 
 //	header用のDao
 
-//	カテゴリー検索タブ用
+
+	/**検索タブ隣のカテゴリータブを表示するためのもの
+	 * @return
+	 */
 	public static List<CategoryDateBeans> CategoryList(){
 		        Connection conn = null;
 		        List<CategoryDateBeans> categoryList = new ArrayList<CategoryDateBeans>();

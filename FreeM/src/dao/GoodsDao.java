@@ -159,7 +159,16 @@ public class GoodsDao {
 
 	}
 
-//	商品出品用
+	/**出品する商品のデータをDBに保存する
+	 * @param userId
+	 * @param goodsName
+	 * @param fileName
+	 * @param categoryId
+	 * @param deliveryId
+	 * @param price
+	 * @param coment
+	 * @throws SQLException
+	 */
 	public static void Exhibit(int userId,String goodsName, String fileName, int categoryId, int deliveryId, int price,
 			String coment) throws SQLException {
 //		DBに接続
@@ -206,7 +215,12 @@ public class GoodsDao {
 		}
 	}
 
-//	商品詳細用
+
+	/**商品の詳細情報を返す
+	 * @param goodsId
+	 * @return	商品の詳細データ
+	 * @throws SQLException
+	 */
 	public static GoodsDateBeans GR(int goodsId) throws SQLException {
 //		DBに接続
 		Connection conn = DBManager.getConnection();
@@ -265,7 +279,12 @@ public class GoodsDao {
 
 	}
 
-//	商品を購入待機中に移行
+
+	/**出品されている商品を購入待機中に移行する
+	 * @param goodsId
+	 * @param userId
+	 * @throws SQLException
+	 */
 	public static void Standby(int goodsId,int userId) throws SQLException {
 		Connection conn = DBManager.getConnection();
 
@@ -294,7 +313,12 @@ public class GoodsDao {
 		}
 	}
 
-//	商品に購入者のIDを入力
+
+	/**購入者のIDをDBに保存する
+	 * @param userId
+	 * @param goodsId
+	 * @throws SQLException
+	 */
 	public static void BuyUser(int userId,int goodsId) throws SQLException {
 		Connection conn = DBManager.getConnection();
 
@@ -318,7 +342,12 @@ public class GoodsDao {
 		}
 	}
 
-//	出品待機用
+
+	/**出品待機状態の商品を返す
+	 * @param userId
+	 * @return	出品待機商品データ
+	 * @throws SQLException
+	 */
 	public static ArrayList<GoodsDateBeans> ExhibitStandBy(int userId) throws SQLException{
 //		DBに接続
 		Connection conn = DBManager.getConnection();
@@ -363,7 +392,12 @@ public class GoodsDao {
 		}
 	}
 
-//	出品履歴用
+
+	/**出品済み状態の商品をユーザーごとに返す
+	 * @param userId
+	 * @return	出品履歴
+	 * @throws SQLException
+	 */
 	public static ArrayList<GoodsDateBeans> ExhibitHistory(int userId) throws SQLException{
 //		DBに接続
 		Connection conn = DBManager.getConnection();
@@ -408,7 +442,12 @@ public class GoodsDao {
 		}
 	}
 
-//	購入履歴用
+
+	/**購入履歴商品をユーザーIDに基づいて返す
+	 * @param userId
+	 * @return	購入履歴商品データ
+	 * @throws SQLException
+	 */
 	public static ArrayList<GoodsDateBeans> BuyHistory(int userId) throws SQLException{
 //		DBに接続
 		Connection conn = DBManager.getConnection();
@@ -454,7 +493,12 @@ public class GoodsDao {
 	}
 
 
-//	出品物リスト
+
+	/**ユーザーIDに基づいて出品中の商品を返す
+	 * @param userId
+	 * @return	出品商品リスト
+	 * @throws SQLException
+	 */
 	public static ArrayList<GoodsDateBeans> ExhibitList(int userId) throws SQLException{
 //		DBに接続
 		Connection conn = DBManager.getConnection();
@@ -501,7 +545,12 @@ public class GoodsDao {
 
 
 
-//	購入待機用
+
+	/**購入待機状態の商品をユーザーIDに基づいて返す
+	 * @param userId
+	 * @return	購入待機商品
+	 * @throws SQLException
+	 */
 	public static ArrayList<GoodsDateBeans> BuyStandBy(int userId) throws SQLException{
 //		DBに接続
 		Connection conn = DBManager.getConnection();
@@ -547,6 +596,18 @@ public class GoodsDao {
 	}
 
 //	商品更新用
+
+	/**出品済みの商品の情報をUPDATEする
+	 * @param goodsName
+	 * @param fileName
+	 * @param categoryId
+	 * @param detail
+	 * @param price
+	 * @param deliveryMethodId
+	 * @param goodsId
+	 * @param userId
+	 * @throws SQLException
+	 */
 	public static void GoodsUpdate(String goodsName,String fileName,int categoryId,String detail,int price,int deliveryMethodId,int goodsId,int userId) throws SQLException{
 //		DBに接続
 		Connection conn = DBManager.getConnection();
@@ -589,7 +650,12 @@ public class GoodsDao {
 
 	}
 
-//	商品削除用
+
+	/**出品状態の商品を削除する
+	 * @param userId
+	 * @param goodsId
+	 * @throws SQLException
+	 */
 	public static void GoodsDelete(int userId,int goodsId) throws SQLException {
 		Connection conn = DBManager.getConnection();
 
@@ -617,6 +683,12 @@ public class GoodsDao {
 		}
 	}
 
+
+	/**exibit_user_statusを購入承認状態にする
+	 * @param userId
+	 * @param goodsId
+	 * @throws SQLException
+	 */
 	public static void ExhibitUserStatus(int userId,int goodsId) throws SQLException {
 //		DBに接続
 		Connection conn = DBManager.getConnection();
@@ -640,6 +712,12 @@ public class GoodsDao {
 		}
 	}
 
+
+	/**buy_user_statusを購入承認状態にする
+	 * @param userId
+	 * @param goodsId
+	 * @throws SQLException
+	 */
 	public static void BuyUserStatus(int userId,int goodsId) throws SQLException{
 		Connection conn = DBManager.getConnection();
 		try {
@@ -662,6 +740,11 @@ public class GoodsDao {
 	}
 
 //	商品を購入済みの状態にする処理
+
+	/**商品ステータスを３に変更し購入済みに変更する
+	 * @param goodsId
+	 * @throws SQLException
+	 */
 	public static void BuyComplete(int goodsId) throws SQLException {
 //		DB接続
 		Connection conn = DBManager.getConnection();
