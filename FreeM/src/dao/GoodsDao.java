@@ -250,6 +250,7 @@ public class GoodsDao {
 				gdb.setId(rs.getInt("f_item.id"));
 				gdb.setName(rs.getString("f_item.name"));
 				gdb.setFileName(rs.getString("f_item.file_name"));
+				gdb.setStatus(rs.getInt("f_item.status"));
 				gdb.setCategoryName(rs.getString("category.name"));
 				gdb.setPrice(rs.getInt("f_item.price"));
 				gdb.setDetail(rs.getString("f_item.detail"));

@@ -31,8 +31,10 @@
 	<p>出品者 ${goods.exibitUserName}</p>
 	<p>${goods.updateDate} 更新</p>
 
-	<c:if test="${userInfo.userId != goods.exibitUserId}">
-		<a href="Question?goodsId=${goods.id}"><button type="button">購入申請</button></a>
+	<c:if test="${goods.status==1}">
+		<c:if test="${userInfo.userId!=goods.exibitUserId}">
+			<a href="Question?goodsId=${goods.id}"><button type="button">購入申請</button></a>
+		</c:if>
 	</c:if>
 
       </div>
