@@ -15,6 +15,14 @@ import free_mm.FMHelper;
 public class UserDao {
 
 	//ユーザーIDを取得用
+
+	/**ログイン時にユーザーIDを返す
+	 * @param loginId
+	 * @param password
+	 * @return	ユーザーID
+	 * @throws NoSuchAlgorithmException
+	 * @throws SQLException
+	 */
 	@SuppressWarnings("null")
 	public int getUserId(String loginId, String password) throws NoSuchAlgorithmException, SQLException {
 		Connection conn = DBManager.getConnection();
@@ -51,7 +59,13 @@ public class UserDao {
 		}
 	}
 
-	//ユーザーIDからユーザー情報を取得
+
+
+	/**ユーザーIDに基づいてユーザーの情報を返す
+	 * @param userId
+	 * @return	ユーザー情報
+	 * @throws SQLException
+	 */
 	public static UserDateBeans UserDateBeans(int userId) throws SQLException {
 		//データベースへ接続
 		Connection conn = DBManager.getConnection();
@@ -76,7 +90,12 @@ public class UserDao {
 		}
 		return udb;
 	}
-//	ユーザー情報の全件取得
+
+	/**ユーザーIDに基づいてユーザーの全情報を返す
+	 * @param userId
+	 * @return	ユーザー全情報
+	 * @throws SQLException
+	 */
 	public static UserDateBeans AllUserDateBeans(int userId) throws SQLException {
 		//データベースへ接続
 		Connection conn = DBManager.getConnection();
@@ -106,7 +125,16 @@ public class UserDao {
 		return udb;
 	}
 
-//	ユーザー新規登録用
+
+	/**新しいユーザーの情報をDBに保存する（新規登録）
+	 * @param loginId
+	 * @param name
+	 * @param password
+	 * @param birthDate
+	 * @param mailAddress
+	 * @param streetAddress
+	 * @throws NoSuchAlgorithmException
+	 */
 	public static void UserEntry(String loginId,String name,String password,String birthDate,String mailAddress,String streetAddress) throws NoSuchAlgorithmException{
 //		データベースへの接続
 		Connection conn = DBManager.getConnection();
@@ -152,7 +180,17 @@ public class UserDao {
 		}
 	}
 
-//	ユーザー更新用
+
+	/**既存ユーザーの情報をUPDATEする
+	 * @param userId
+	 * @param name
+	 * @param birthDate
+	 * @param password
+	 * @param mailAddress
+	 * @param streetAddress
+	 * @throws SQLException
+	 * @throws NoSuchAlgorithmException
+	 */
 	public static void UserUpdate(int userId,String name,String birthDate,String password,String mailAddress,String streetAddress) throws SQLException, NoSuchAlgorithmException {
 //		データベースに接続
 		Connection conn = DBManager.getConnection();
@@ -224,7 +262,10 @@ public class UserDao {
 		}
 	}
 
-//	ユーザーリスト用
+
+	/**全ユーザーの情報を返す
+	 * @return ユーザーのリスト
+	 */
 	public static List<UserDateBeans> UserAll(){
 		Connection conn = DBManager.getConnection();
 		List<UserDateBeans> userList = new ArrayList<UserDateBeans>();
@@ -267,6 +308,7 @@ public class UserDao {
 		}
 		return userList;
 	}
+
 
 	public static List<UserDateBeans> UserSeach(String name) {
         Connection conn = null;

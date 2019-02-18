@@ -42,7 +42,12 @@
         </tr>
     </table>
     <div class="text-center">
-    <button type="submit">成立</button>
+
+    <c:if test="${gdb.exhibitUserStatus==0 ||gdb.buyUserStatus==0}">
+    	<button type="submit">成立</button>
+    	<a href="BuyCancel?goodsId=${gdb.id}"><button type="button">購入キャンセル</button></a>
+    </c:if>
+
     </div>
     </div>
 

@@ -595,7 +595,6 @@ public class GoodsDao {
 		}
 	}
 
-//	商品更新用
 
 	/**出品済みの商品の情報をUPDATEする
 	 * @param goodsName
@@ -766,5 +765,28 @@ public class GoodsDao {
 			}
 		}
 
+	}
+
+	//
+	public static void BuyCancel(int goodsId) throws SQLException {
+		Connection conn = DBManager.getConnection();
+
+		try {
+			PreparedStatement pStmt = conn.prepareStatement("UPDATE f_item SET\r\n"
+					+ "status=1,\r\n"
+					+ "buy_user_id=null,\r\n"
+					+ "exibit_user_status=0,\r\n"
+					+ "buy_user_status=0 \r\n"
+					+ "WHERE id=?");
+			pStmt.setInt(1,goodsId);
+
+			pStmt.executeUpdate();
+
+			conn.close();
+		}finally {
+			if(conn!=null) {
+				conn.close();
+			}
+		}
 	}
 }

@@ -65,6 +65,8 @@ public class FMHelper {
 	static final String Complete_PAGE="/WEB-INF/jsp/Complete.jsp";
 //	申請確認ページ
 	static final String Question_Page="/WEB-INF/jsp/Question.jsp";
+//	購入キャンセルページ
+	static final String BUY_CANCEL_PAGE="/WEB-INF/jsp/BuyCancel.jsp";
 
 	//MD5暗号化用のメソッド
 	public static String psMD5(String ps) throws NoSuchAlgorithmException {
